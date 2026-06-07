@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Loyalty Contracting Group Inc.</title>
 
+  <link rel="preload" as="video" href="assets/images/hero.mp4" type="video/mp4">
+  <link rel="preload" as="image" href="assets/images/hero-poster.jpg">
+
   <link rel="stylesheet" href="css/style.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,13 +30,21 @@
       <a href="#">More ▾</a>
     </nav>
 
-    <button class="contact-btn">Contact Us</button>
+    <a href="contact.html" class="contact-btn">Contact Us</a>
   </header>
 
   <!-- Hero Section -->
   <section class="hero-section">
     <div class="hero-image">
-      <video class="hero-video" autoplay muted loop playsinline>
+      <video 
+        class="hero-video" 
+        autoplay 
+        muted 
+        loop 
+        playsinline 
+        preload="auto"
+        poster="assets/images/hero-poster.jpg"
+      >
         <source src="assets/images/hero.mp4" type="video/mp4">
       </video>
     <div class="hero-overlay"></div>
@@ -49,8 +60,8 @@
         </p>
 
         <div class="hero-buttons">
-          <button class="primary-btn">Get My Free Quote</button>
-          <button class="secondary-btn">Get a Free Consultation</button>
+          <a href="contact.html" class="primary-btn">Get My Free Quote</a>
+          <a href="contact.html" class="secondary-btn">Get a Free Consultation</a>
         </div>
       </div>
     </div>
@@ -66,12 +77,12 @@
         </div>
 
         <div>
-          <h3>500+</h3>
+          <h3>250+</h3>
           <span>Renovation Delivered</span>
         </div>
 
         <div>
-          <h3>2K+</h3>
+          <h3>200+</h3>
           <span>Happy Clients</span>
         </div>
       </div>
@@ -91,45 +102,59 @@
       </p>
     </div>
 
-    <div class="property-grid">
-      <div class="main-property-card">
-        <img src="assets/images/house-main.jpg" alt="Luxury house">
+<div class="property-grid">
 
-         
+  <div class="main-property-card">
+    <img src="assets/images/house-main.jpg" alt="Complete home renovation">
 
-        <div class="price-card">
-          <div>
-            <h3>$930,000</h3>
-            <p>789 Lombard Street,<br>San Francisco,<br>CA 94133</p>
-          </div>
-
-          <div class="property-info">
-            <span>3,230<br><small>Sq. Ft</small></span>
-            <span>3<br><small>Beds</small></span>
-            <span>2<br><small>Baths</small></span>
-          </div>
-
-          <button class="arrow-btn">→</button>
-        </div>
-      </div>
-
-      <div class="small-grid">
-        <div class="image-card">
-          <img src="assets/images/property-1.jpg" alt="Kitchen">
-           
-        </div>
-
-        <div class="image-card">
-          <img src="assets/images/property-2.jpg" alt="Modern house">
-           
-        </div>
-
-        <div class="image-card wide">
-          <img src="assets/images/property-3.jpg" alt="Dining area">
-           
-        </div>
+    <div class="price-card service-overlay-card">
+      <div>
+        <h3>Complete Home Renovations</h3>
+        <p>
+          Transforming homes with quality craftsmanship and modern design.
+        </p>
       </div>
     </div>
+  </div>
+
+  <div class="small-grid">
+
+    <div class="image-card">
+      <img src="assets/images/property-1.jpg" alt="Kitchen renovation">
+
+      <div class="mini-service-card">
+        <h4>Kitchen Renovations</h4>
+        <p>
+          Custom kitchens designed for style, functionality, and everyday living.
+        </p>
+      </div>
+    </div>
+
+    <div class="image-card">
+      <img src="assets/images/property-2.jpg" alt="Bathroom renovation">
+
+      <div class="mini-service-card">
+        <h4>Bathroom Renovations</h4>
+        <p>
+          Beautiful, comfortable, and modern bathroom transformations.
+        </p>
+      </div>
+    </div>
+
+    <div class="image-card wide">
+      <img src="assets/images/property-3.jpg" alt="Basement remodeling">
+
+      <div class="mini-service-card">
+        <h4>Basement Remodeling</h4>
+        <p>
+          Turn unused space into a functional living area for your family.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
   </section>
 
   <!-- About Section -->
@@ -159,16 +184,7 @@
   <section class="showcase-section">
     <h2>Project Showcase</h2>
 
-    <div class="tabs">
-      <button class="active">Renovation</button>
-      <button>Remodeling</button>
-      <button>Commercial</button>
 
-      <div class="search-box">
-        <input type="text" placeholder="Search projects or Services" />
-        <button>🔍</button>
-      </div>
-    </div>
 
     <div class="showcase-grid">
       <div class="showcase-card">
@@ -177,50 +193,18 @@
 
       <div class="showcase-card">
         <img src="assets/images/property-2.jpg" alt="Property">
-
-        <div class="showcase-info">
-          <h4>Atlanta, GA</h4>
-          <div>
-            <span>3,120<br><small>Sq. Ft</small></span>
-            <span>5<br><small>Beds</small></span>
-            <span>3<br><small>Baths</small></span>
-          </div>
-        </div>
       </div>
 
       <div class="showcase-card">
         <img src="assets/images/house-main.jpg" alt="Property">
-
-        <div class="showcase-info">
-          <h4>San Francisco, CA</h4>
-          <div>
-            <span>2,320<br><small>Sq. Ft</small></span>
-            <span>4<br><small>Beds</small></span>
-            <span>3<br><small>Baths</small></span>
-          </div>
-        </div>
       </div>
 
       <div class="showcase-card">
         <img src="assets/images/property-4.jpg" alt="Property">
-
-        <div class="showcase-info">
-          <h4>Boston, MA</h4>
-          <div>
-            <span>3,120<br><small>Sq. Ft</small></span>
-            <span>5<br><small>Beds</small></span>
-            <span>3<br><small>Baths</small></span>
-          </div>
-        </div>
       </div>
     </div>
 
-    <div class="dots">
-      <span class="active-dot"></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+
   </section>
 
   <script src="js/script.js"></script>
