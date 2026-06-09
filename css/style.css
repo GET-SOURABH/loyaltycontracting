@@ -1133,3 +1133,317 @@ button {
     height: 260px;
   }
 }
+
+
+/* Floating WhatsApp Button */
+
+.whatsapp-float {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  width: 62px;
+  height: 62px;
+  background: #25d366;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  z-index: 9999;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.32);
+}
+
+.whatsapp-icon {
+  width: 34px;
+  height: 34px;
+  fill: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .whatsapp-float {
+    right: 18px;
+    bottom: 18px;
+    width: 56px;
+    height: 56px;
+  }
+
+  .whatsapp-icon {
+    width: 31px;
+    height: 31px;
+  }
+}
+
+
+/* Make Project Showcase sliders 2 per row and bigger */
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 34px;
+  padding: 0 28px;
+}
+
+.showcase-card.before-after-card {
+  height: 330px;
+  border-radius: 28px;
+}
+
+.ba-slider {
+  border-radius: 28px;
+}
+
+.showcase-section {
+  padding-bottom: 70px;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .showcase-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    padding: 0 20px;
+  }
+
+  .showcase-card.before-after-card {
+    height: 280px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 0 18px;
+  }
+
+  .showcase-card.before-after-card {
+    height: 300px;
+  }
+}
+
+
+/* Make Project Showcase sliders taller */
+
+.showcase-card.before-after-card {
+  height: 390px;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .showcase-card.before-after-card {
+    height: 330px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .showcase-card.before-after-card {
+    height: 340px;
+  }
+}
+
+
+/* Google Reviews Section */
+
+.google-reviews-section {
+  padding: 90px 6% 100px;
+  background: #ffffff;
+}
+
+.google-reviews-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 48px;
+}
+
+.google-badge {
+  display: inline-block;
+  background: rgba(184, 121, 34, 0.12);
+  color: #b87922;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+
+.google-reviews-header h2 {
+  font-size: 48px;
+  line-height: 1.05;
+  color: #161616;
+  margin-bottom: 16px;
+}
+
+.google-reviews-header p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.google-rating {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 16px;
+  color: #333;
+}
+
+.google-rating .stars {
+  color: #fbbc04;
+  font-size: 24px;
+  letter-spacing: 2px;
+}
+
+.google-rating strong {
+  font-size: 22px;
+  color: #161616;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.review-card {
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 32px;
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.09);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.14);
+}
+
+.review-top {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.review-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #b87922;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.review-top h4 {
+  font-size: 18px;
+  color: #161616;
+  margin-bottom: 4px;
+}
+
+.review-top span {
+  font-size: 13px;
+  color: #777;
+  font-weight: 600;
+}
+
+.review-stars {
+  color: #fbbc04;
+  font-size: 20px;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.review-card p {
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: #333;
+  font-weight: 500;
+}
+
+.google-review-cta {
+  text-align: center;
+  margin-top: 42px;
+}
+
+.google-review-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #b87922;
+  color: #ffffff;
+  padding: 17px 30px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 800;
+  transition: all 0.3s ease;
+}
+
+.google-review-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px rgba(184, 121, 34, 0.35);
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .google-reviews-header h2 {
+    font-size: 40px;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .google-reviews-section {
+    padding: 70px 22px 90px;
+  }
+
+  .google-reviews-header h2 {
+    font-size: 34px;
+  }
+
+  .review-card {
+    padding: 26px;
+  }
+}
+
+
+/* Fix Who We Are card position inside hero image */
+
+.hero-section {
+  position: relative;
+}
+
+.who-card {
+  bottom: 28px !important;
+  right: 60px;
+}
+
+
+@media (max-width: 900px) {
+  .who-card {
+    position: relative;
+    right: auto;
+    bottom: auto !important;
+    margin: 25px auto 0;
+    width: calc(100% - 40px);
+  }
+}
