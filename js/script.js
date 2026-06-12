@@ -18,3 +18,5 @@ beforeAfterCards.forEach((card) => {
     card.style.setProperty("--position", slider.value + "%");
   });
 });
+
+
