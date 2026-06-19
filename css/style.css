@@ -26,7 +26,7 @@ button {
 
 .navbar {
   width: 100%;
-  padding: 26px 36px;
+  padding: 5px 36px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -53,6 +53,14 @@ button {
   color: #111;
   font-size: 15px;
   font-weight: 600;
+}
+
+.nav-links a {
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #b77725;
 }
 
 .contact-btn {
@@ -1449,8 +1457,8 @@ button {
 }
 
 .logo img {
-  height: 70px;
-  max-width: 280px;
+  height: 85px;
+  max-width: 340px;
   object-fit: contain;
 }
 
@@ -1471,24 +1479,35 @@ button {
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 180px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  display: none;
+
+  min-width: 220px;
+
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
+
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+
+  overflow: hidden;
   z-index: 1000;
+  display: none;
 }
 
 .dropdown-content a {
+  color: #111;
+  padding: 16px 20px;
   display: block;
-  padding: 12px 16px;
-  color: #222;
   text-decoration: none;
-  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .dropdown-content a:hover {
-  background: #f5f5f5;
+  background: #b67a24;
+  color: white;
+  padding-left: 24px;
 }
 
 .dropdown:hover .dropdown-content {
@@ -2184,4 +2203,104 @@ html {
     align-items: flex-start;
     margin-top: 36px;
   }
+}
+
+
+/* ================================
+   Top Contact Bar
+================================ */
+
+.top-contact-bar {
+  width: 100%;
+  background: linear-gradient(90deg, #151515, #2a2119);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 11px 60px;
+  box-sizing: border-box;
+}
+
+.top-contact-inner {
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 22px;
+}
+
+.top-contact-link {
+  color: #ffffff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.top-contact-link:hover {
+  color: #b77725;
+}
+
+.contact-icon {
+  color: #b77725;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.top-contact-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+@media (max-width: 768px) {
+  .top-contact-bar {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+
+  .top-contact-inner {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    text-align: center;
+  }
+
+  .top-contact-divider {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-contact-inner {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .top-contact-link {
+    font-size: 13px;
+  }
+}
+
+
+.email-icon {
+  font-size: 22px;
+  line-height: 1;
+  transform: translateY(1px);
+}
+
+
+.top-contact-bar {
+  justify-content: flex-end;
+  padding-right: 15px;
+}
+
+
+
+.dropdown-content a:hover {
+  background: #b67a24;
+  color: white;
+  padding-left: 20px;
 }
