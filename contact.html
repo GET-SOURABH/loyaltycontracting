@@ -3,63 +3,71 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Contact Us | Loyalty Contracting Group Inc.</title>
-
+  <title>Free Consultation | Loyalty Contracting Group Inc.</title>
   <link rel="stylesheet" href="css/style.css" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
+  <!-- Top Contact Bar -->
+  <div class="top-contact-bar">
+    <div class="top-contact-inner">
+      <a href="tel:+16476864405" class="top-contact-link">
+        <span class="contact-icon">☎</span>
+        +1 (647) 686-4405
+      </a>
+      <span class="top-contact-divider"></span>
+      <a href="mailto:loyaltycontracting.inc@gmail.com" class="top-contact-link">
+        loyaltycontracting.inc@gmail.com
+      </a>
+    </div>
+  </div>
 
   <!-- Header -->
   <header class="navbar">
     <a href="index.html" class="logo">
-      Loyalty <span>Contracting</span> Group Inc.
+      <img src="assets/images/logo.png" alt="Loyalty Contracting Group Inc. Logo">
     </a>
-
     <nav class="nav-links">
-      <a href="index.html#about">About Us</a>
-      <a href="index.html#properties">Properties</a>
-      <a href="index.html#services">Services</a>
       <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <div class="dropdown">
+        <a href="#">Services ▾</a>
+        <div class="dropdown-content">
+          <a href="services/full-house-renovation.html">Full House Renovation</a>
+          <a href="services/kitchen.html">Kitchen</a>
+          <a href="services/bathroom.html">Bathroom</a>
+          <a href="services/basement.html">Basement</a>
+          <a href="services/flooring.html">Flooring</a>
+        </div>
+      </div>
+      <a href="index.html#reviews">Reviews</a>
     </nav>
-
     <a href="contact.html" class="contact-btn">Contact Us</a>
   </header>
 
-  <!-- Contact Hero Section -->
+  <!-- Consultation Hero Section -->
   <main class="contact-hero-page">
     <div class="contact-hero-bg">
-
       <div class="contact-hero-overlay"></div>
-
       <div class="contact-page-badge">🍁 Proudly Canadian</div>
-
       <div class="contact-hero-content">
 
-        <div class="contact-info-panel">
-          <h1>Let’s Build Your<br>Dream Space</h1>
-
+        <div class="contact-info-panel reveal">
+          <h1>Let’s Discuss Your<br>Next Project</h1>
           <p>
-            Tell us about your renovation, remodeling, or contracting project.
-            Our team will review your request and get back to you with the next steps.
+            Schedule a free, no-obligation consultation. Tell us what you're looking for, and we'll reach out to discuss ideas, timelines, and next steps for your home.
           </p>
-
           <div class="contact-mini-stats">
             <div>
               <h3>80+</h3>
               <span>Projects Completed</span>
             </div>
-
             <div>
               <h3>250+</h3>
               <span>Renovations Delivered</span>
             </div>
-
             <div>
               <h3>200+</h3>
               <span>Happy Clients</span>
@@ -67,14 +75,13 @@
           </div>
         </div>
 
-        <div class="contact-form-panel">
-          <h2>Contact Us</h2>
-
+        <div class="contact-form-panel reveal">
+          <h2>Free Consultation</h2>
           <form class="premium-contact-form" action="https://formspree.io/f/xqeopjjj" method="POST">
-
+            
             <div class="premium-form-group">
               <label for="name">Full Name</label>
-              <input type="text" id="name" name="name" placeholder="Enter your name" required>
+              <input type="text" id="name" name="name" placeholder="Enter your full name" required>
             </div>
 
             <div class="premium-form-group">
@@ -84,48 +91,105 @@
 
             <div class="premium-form-group">
               <label for="phone">Phone Number</label>
-              <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+              <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
             </div>
 
             <div class="premium-form-group">
-              <label for="service">Service Needed</label>
-              <select id="service" name="service">
-                <option value="">Select a service</option>
-                <option value="Home Renovation">Home Renovation</option>
-                <option value="Basement Renovation">Basement Renovation</option>
-                <option value="Kitchen Remodeling">Kitchen Remodeling</option>
-                <option value="Bathroom Remodeling">Bathroom Remodeling</option>
-                <option value="Commercial Contracting">Commercial Contracting</option>
+              <label for="location">Property City or Postal Code</label>
+              <input type="text" id="location" name="location" placeholder="e.g. Toronto, ON" required>
+            </div>
+
+            <div class="premium-form-group">
+              <label for="service">Topic of Interest</label>
+              <select id="service" name="service" required>
+                <option value="">Select a topic...</option>
+                <option value="Full House Renovation">Full House Renovation</option>
+                <option value="Kitchen Renovation">Kitchen Renovation</option>
+                <option value="Bathroom Renovation">Bathroom Renovation</option>
+                <option value="Basement Remodeling">Basement Remodeling</option>
+                <option value="Flooring">Flooring</option>
                 <option value="Other">Other</option>
               </select>
             </div>
 
-            <div class="premium-form-group">
-              <label for="message">Project Details</label>
-              <textarea id="message" name="message" placeholder="Tell us about your project..." required></textarea>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="premium-form-group">
+                  <label for="contact-method">Preferred Contact</label>
+                  <select id="contact-method" name="contact_method" required>
+                    <option value="Phone Call">Phone Call</option>
+                    <option value="Text Message">Text Message</option>
+                    <option value="Email">Email</option>
+                  </select>
+                </div>
+                
+                <div class="premium-form-group">
+                  <label for="best-time">Best Time to Reach</label>
+                  <select id="best-time" name="best_time" required>
+                    <option value="Morning">Morning</option>
+                    <option value="Afternoon">Afternoon</option>
+                    <option value="Evening">Evening</option>
+                  </select>
+                </div>
             </div>
 
-            <input type="hidden" name="_subject" value="New Contact Request - Loyalty Contracting Group Inc.">
-
-            <button type="submit" class="premium-submit-btn">Submit Request</button>
-
+            <input type="hidden" name="_subject" value="New Consultation Request - Loyalty Contracting Group Inc.">
+            <button type="submit" class="premium-submit-btn">Request Consultation</button>
           </form>
         </div>
-
       </div>
     </div>
   </main>
-<a 
-  href="https://wa.me/14161234567?text=Hi%20Loyalty%20Contracting%20Group%2C%20I%20would%20like%20to%20discuss%20a%20renovation%20project."
-  class="whatsapp-float"
-  target="_blank"
-  rel="noopener"
-  aria-label="Chat with us on WhatsApp"
->
-  <svg class="whatsapp-icon" viewBox="0 0 32 32" aria-hidden="true">
-    <path d="M16.04 3C8.86 3 3.02 8.82 3.02 15.98c0 2.29.6 4.53 1.75 6.5L3 29l6.69-1.73a13.02 13.02 0 0 0 6.35 1.62h.01c7.18 0 13.02-5.82 13.02-12.98C29.07 8.82 23.23 3 16.04 3zm0 23.7h-.01c-1.98 0-3.92-.53-5.62-1.54l-.4-.24-3.97 1.03 1.06-3.85-.26-.4a10.65 10.65 0 0 1-1.63-5.72c0-5.95 4.86-10.79 10.83-10.79 2.9 0 5.62 1.13 7.67 3.17a10.72 10.72 0 0 1 3.18 7.62c0 5.95-4.86 10.72-10.85 10.72zm5.94-8.05c-.33-.16-1.94-.95-2.24-1.06-.3-.11-.52-.16-.74.16-.22.33-.85 1.06-1.04 1.28-.19.22-.38.25-.71.08-.33-.16-1.38-.51-2.63-1.62-.97-.86-1.63-1.93-1.82-2.26-.19-.33-.02-.5.14-.66.15-.15.33-.38.49-.57.16-.19.22-.33.33-.55.11-.22.05-.41-.03-.57-.08-.16-.74-1.78-1.01-2.44-.27-.64-.54-.55-.74-.56h-.63c-.22 0-.57.08-.87.41-.3.33-1.14 1.11-1.14 2.7s1.17 3.14 1.33 3.36c.16.22 2.3 3.5 5.58 4.91.78.34 1.39.54 1.86.69.78.25 1.49.21 2.05.13.63-.09 1.94-.79 2.21-1.55.27-.76.27-1.41.19-1.55-.08-.14-.3-.22-.63-.38z"/>
-  </svg>
-</a>
 
+  <!-- Footer -->
+  <footer class="site-footer reveal">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>Loyalty Contracting Group Inc.</h3>
+        <p>Full Home Renovation and Construction Services</p>
+        <div class="footer-contact">
+          <a href="tel:+16476864405">Phone: +1(647)686-4405</a>
+          <a href="mailto:loyaltycontracting.inc@gmail.com">Email: loyaltycontracting.inc@gmail.com</a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h4>Main Services</h4>
+        <a href="services/kitchen.html">Kitchen Renovations</a>
+        <a href="services/bathroom.html">Bathroom Renovations</a>
+        <a href="services/basement.html">Basement Remodeling</a>
+        <a href="services/flooring.html">Flooring</a>
+        <a href="services/full-house-renovation.html">Complete Home Renovation</a>
+      </div>
+      <div class="footer-column">
+        <h4>Service Areas</h4>
+        <p>Toronto, Mississauga, Brampton, Oakville, Burlington, Milton, Hamilton, Etobicoke, Vaughan, Markham, and surrounding areas.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Business Hours</h4>
+        <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
+        <p>Saturday: 9:00 AM - 4:00 PM</p>
+        <p>Sunday: Closed</p>
+      </div>
+      <div class="footer-column">
+        <h4>Connect With Us</h4>
+        <a href="https://share.google/0neSl0NSlJDCJVnxr" target="_blank" rel="noopener">Google Reviews</a>
+        <a href="#" target="_blank" rel="noopener">Instagram</a>
+        <a href="#" target="_blank" rel="noopener">TikTok</a>
+        <a href="#" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Loyalty Contracting Group Inc. All Rights Reserved.</p>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/16476864405?text=Hi%20Loyalty%20Contracting%20Group%2C%20I%20would%20like%20to%20schedule%20a%20free%20consultation." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+    <svg class="whatsapp-icon" viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M16.04 3C8.86 3 3.02 8.82 3.02 15.98c0 2.29.6 4.53 1.75 6.5L3 29l6.69-1.73a13.02 13.02 0 0 0 6.35 1.62h.01c7.18 0 13.02-5.82 13.02-12.98C29.07 8.82 23.23 3 16.04 3zm0 23.7h-.01c-1.98 0-3.92-.53-5.62-1.54l-.4-.24-3.97 1.03 1.06-3.85-.26-.4a10.65 10.65 0 0 1-1.63-5.72c0-5.95 4.86-10.79 10.83-10.79 2.9 0 5.62 1.13 7.67 3.17a10.72 10.72 0 0 1 3.18 7.62c0 5.95-4.86 10.72-10.85 10.72zm5.94-8.05c-.33-.16-1.94-.95-2.24-1.06-.3-.11-.52-.16-.74.16-.22.33-.85 1.06-1.04 1.28-.19.22-.38.25-.71.08-.33-.16-1.38-.51-2.63-1.62-.97-.86-1.63-1.93-1.82-2.26-.19-.33-.02-.5.14-.66.15-.15.33-.38.49-.57.16-.19.22-.33.33-.55.11-.22.05-.41-.03-.57-.08-.16-.74-1.78-1.01-2.44-.27-.64-.54-.55-.74-.56h-.63c-.22 0-.57.08-.87.41-.3.33-1.14 1.11-1.14 2.7s1.17 3.14 1.33 3.36c.16.22 2.3 3.5 5.58 4.91.78.34 1.39.54 1.86.69.78.25 1.49.21 2.05.13.63-.09 1.94-.79 2.21-1.55.27-.76.27-1.41.19-1.55-.08-.14-.3-.22-.63-.38z"/>
+    </svg>
+  </a>
 </body>
 </html>
