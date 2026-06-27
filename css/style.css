@@ -3837,13 +3837,21 @@ button {
 
 
 /* =================================
-   Mobile Menu Consistency + Services Toggle Fix
+   FINAL Premium Mobile Menu
 ================================= */
 
-.services-toggle {
+.nav-toggle,
+.hamburger,
+.mobile-menu-contact,
+.mobile-menu-consultation,
+.services-toggle,
+.menu-icon,
+.menu-arrow,
+.submenu-icon {
   display: none;
 }
 
+/* Desktop Services should look normal */
 .services-menu-label {
   text-decoration: none;
   color: #111;
@@ -3856,90 +3864,268 @@ button {
   color: #b77725;
 }
 
-/* Desktop hover still works */
+/* Keep desktop hover dropdown working */
 @media (min-width: 721px) {
   .dropdown:hover .dropdown-content {
     display: block;
   }
 }
 
-/* Mobile menu fixes */
+/* Mobile Only */
 @media (max-width: 720px) {
-  .nav-links {
-    gap: 0;
-  }
-
-  /* Make Home, About Us, Services, Reviews same size */
-  .nav-links > a,
-  .services-menu-label {
-    width: 100%;
+  .navbar {
+    position: relative;
+    padding: 24px 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 18px;
-    border-radius: 16px;
-    font-size: 22px !important;
-    line-height: 1.2;
-    font-weight: 900 !important;
-    color: #111111;
   }
 
-  .nav-links > a:hover,
-  .services-menu-label:hover {
-    background: rgba(184, 121, 34, 0.1);
+  .logo img {
+    height: 64px;
+    max-width: 330px;
+    object-fit: contain;
+  }
+
+  .navbar > .contact-btn {
+    display: none !important;
+  }
+
+  .nav-toggle,
+  .services-toggle {
+    position: absolute !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    pointer-events: none !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    display: block !important;
+  }
+
+  .hamburger {
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    background: #b87922;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    flex-shrink: 0;
+    cursor: pointer;
+    z-index: 10002;
+    box-shadow: 0 14px 35px rgba(184, 121, 34, 0.38);
+  }
+
+  .hamburger span {
+    width: 28px;
+    height: 3px;
+    background: #ffffff;
+    border-radius: 99px;
+    transition: 0.25s ease;
+  }
+
+  .nav-toggle:checked + .hamburger span:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+  }
+
+  .nav-toggle:checked + .hamburger span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle:checked + .hamburger span:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+  }
+
+  .nav-links {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 28px;
+    right: 28px;
+    display: none !important;
+    flex-direction: column;
+    gap: 0;
+    padding: 28px 30px 24px;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 24px 65px rgba(0, 0, 0, 0.22);
+    z-index: 10000;
+  }
+
+  .nav-toggle:checked ~ .nav-links {
+    display: flex !important;
+  }
+
+  .menu-row,
+  .services-menu-label {
+    width: 100%;
+    min-height: 72px;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0;
+    text-decoration: none;
+    color: #111111;
+    font-size: 22px !important;
+    font-weight: 900 !important;
+    line-height: 1.2;
+  }
+
+  .menu-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .menu-icon {
+    display: inline-flex !important;
+    width: 34px;
+    min-width: 34px;
     color: #b87922;
+    font-size: 28px;
+    font-weight: 700;
+    justify-content: center;
+  }
+
+  .menu-arrow,
+  .services-arrow {
+    display: inline-flex !important;
+    color: #111111;
+    font-size: 34px;
+    font-weight: 500;
+    transition: 0.25s ease;
   }
 
   .dropdown {
     width: 100%;
   }
 
-  /* Keep Services closed by default on mobile */
-  .dropdown-content {
+  .menu-row-dropdown {
+    display: block;
+  }
+
+  .navbar .nav-links .dropdown .dropdown-content {
     position: static !important;
     display: none !important;
     min-width: 100%;
-    margin: 6px 0 18px;
-    padding: 12px;
+    margin: 16px 0 18px;
+    padding: 14px 22px;
     background: #f8f5f0;
-    border-radius: 22px;
+    border-radius: 24px;
     box-shadow: none;
-    border: 1px solid rgba(184, 121, 34, 0.14);
+    border: 1px solid rgba(184, 121, 34, 0.16);
   }
 
-  /* Open Services only after tapping */
   .services-toggle:checked ~ .dropdown-content {
     display: grid !important;
   }
 
-  .services-toggle:checked + .services-menu-label span {
+  .services-toggle:not(:checked) ~ .dropdown-content {
+    display: none !important;
+  }
+
+  .services-toggle:checked + .services-menu-label .services-arrow {
     transform: rotate(180deg);
   }
 
-  .services-menu-label span {
-    transition: transform 0.25s ease;
+  .dropdown-content a {
+    display: flex !important;
+    align-items: center;
+    gap: 18px;
+    padding: 17px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    color: #111111;
+    text-decoration: none;
+    font-size: 19px !important;
+    font-weight: 900 !important;
+    line-height: 1.2;
   }
 
-  .dropdown-content a {
-    padding: 14px 16px;
-    border-radius: 14px;
-    font-size: 18px !important;
-    line-height: 1.25;
-    font-weight: 800 !important;
-    color: #111111;
+  .dropdown-content a:last-child {
+    border-bottom: none;
   }
 
   .dropdown-content a:hover {
-    background: #b87922;
-    color: #ffffff;
-    padding-left: 16px;
+    background: transparent !important;
+    color: #b87922 !important;
+    padding-left: 0 !important;
+  }
+
+  .submenu-icon {
+    display: inline-flex !important;
+    width: 34px;
+    min-width: 34px;
+    color: #b87922;
+    font-size: 25px;
+    justify-content: center;
+  }
+
+  .mobile-menu-contact,
+  .mobile-menu-consultation {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 62px;
+    border-radius: 999px !important;
+    text-decoration: none;
+    font-size: 21px !important;
+    font-weight: 900 !important;
+    margin-top: 18px;
   }
 
   .mobile-menu-contact {
-    font-size: 22px !important;
-    font-weight: 900 !important;
-    justify-content: center !important;
+    background: #b87922;
+    color: #ffffff !important;
+    box-shadow: 0 14px 32px rgba(184, 121, 34, 0.28);
+  }
+
+  .mobile-menu-consultation {
     margin-top: 12px;
-    padding: 18px 22px !important;
+    background: #ffffff;
+    color: #b87922 !important;
+    border: 2px solid rgba(184, 121, 34, 0.55);
+  }
+}
+
+/* Smaller phones */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 22px 26px;
+  }
+
+  .logo img {
+    height: 58px;
+    max-width: 270px;
+  }
+
+  .hamburger {
+    width: 58px;
+    height: 58px;
+  }
+
+  .nav-links {
+    left: 20px;
+    right: 20px;
+    padding: 24px 26px 22px;
+  }
+
+  .menu-row,
+  .services-menu-label {
+    min-height: 66px;
+    font-size: 20px !important;
+  }
+
+  .dropdown-content a {
+    font-size: 18px !important;
   }
 }

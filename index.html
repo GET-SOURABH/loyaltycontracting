@@ -50,27 +50,78 @@
   </label>
 
   <nav class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="about.html">About Us</a>
+    <a href="index.html" class="menu-row">
+      <span class="menu-left">
+        <span class="menu-icon">⌂</span>
+        Home
+      </span>
+      <span class="menu-arrow">›</span>
+    </a>
 
-  <div class="dropdown">
-    <input type="checkbox" id="services-toggle" class="services-toggle">
+    <a href="about.html" class="menu-row">
+      <span class="menu-left">
+        <span class="menu-icon">👥</span>
+        About Us
+      </span>
+      <span class="menu-arrow">›</span>
+    </a>
 
-    <label for="services-toggle" class="services-menu-label">
-      Services <span>▾</span>
-    </label>
+    <div class="dropdown menu-row-dropdown">
+      <input type="checkbox" id="services-toggle" class="services-toggle">
 
-    <div class="dropdown-content">
-      <a href="services/full-house-renovation.html">Full House Renovation</a>
-      <a href="services/kitchen.html">Kitchen</a>
-      <a href="services/bathroom.html">Bathroom</a>
-      <a href="services/basement.html">Basement</a>
-      <a href="services/flooring.html">Flooring</a>
+      <label for="services-toggle" class="services-menu-label">
+        <span class="menu-left">
+          <span class="menu-icon">🛠</span>
+          Services
+        </span>
+        <span class="services-arrow">⌃</span>
+      </label>
+
+      <div class="dropdown-content">
+        <a href="services/full-house-renovation.html">
+          <span class="submenu-icon">⌂</span>
+          Full House Renovation
+        </a>
+
+        <a href="services/kitchen.html">
+          <span class="submenu-icon">▦</span>
+          Kitchen
+        </a>
+
+        <a href="services/bathroom.html">
+          <span class="submenu-icon">▱</span>
+          Bathroom
+        </a>
+
+        <a href="services/basement.html">
+          <span class="submenu-icon">▰</span>
+          Basement
+        </a>
+
+        <a href="services/flooring.html">
+          <span class="submenu-icon">▥</span>
+          Flooring
+        </a>
+      </div>
     </div>
-  </div>
 
-    <a href="#reviews">Reviews</a>
-    <a href="contact.html" class="mobile-menu-contact">Contact Us</a>
+    <a href="#reviews" class="menu-row">
+      <span class="menu-left">
+        <span class="menu-icon">☆</span>
+        Reviews
+      </span>
+      <span class="menu-arrow">›</span>
+    </a>
+
+    <a href="contact.html" class="mobile-menu-contact">
+      <span>☎</span>
+      Contact Us
+    </a>
+
+    <a href="contact.html" class="mobile-menu-consultation">
+      <span>▣</span>
+      Get a Free Consultation
+    </a>
   </nav>
 
   <a href="contact.html" class="contact-btn">Contact Us</a>
