@@ -56,7 +56,7 @@
       <a href="../index.html#reviews">Reviews</a>
     </nav>
 
-    <a href="../contact.html" class="contact-btn desktop-contact-btn">Contact Us</a>
+    <a href="../index.html#quote" class="contact-btn desktop-contact-btn">Contact Us</a>
 
     <!-- Mobile Hamburger -->
     <input type="checkbox" id="nav-toggle" class="nav-toggle">
@@ -99,9 +99,9 @@
         <span></span>
       </a>
 
-      <a href="../contact.html" class="mobile-menu-main-btn">Contact Us</a>
+      <a href="../index.html#quote" class="mobile-menu-main-btn">Contact Us</a>
 
-      <a href="../contact.html" class="mobile-menu-outline-btn">Get a Free Consultation</a>
+      
     </div>
   </header>
 
@@ -123,7 +123,7 @@
           </p>
 
           <div class="hero-buttons">
-            <a href="../contact.html" class="primary-btn">Get My Free Quote</a>
+            <a href="javascript:void(0)" class="primary-btn open-quote-popup">Get My Free Quote</a>
             <a href="tel:+16476864405" class="secondary-btn">Call Now</a>
           </div>
         </div>
@@ -372,7 +372,7 @@
       </p>
 
       <div class="service-cta-buttons">
-        <a href="../contact.html" class="primary-btn">Get My Free Quote</a>
+        <a href="javascript:void(0)" class="primary-btn open-quote-popup">Get My Free Quote</a>
         <a href="tel:+16476864405" class="dark-outline-btn">+1 (647) 686-4405</a>
       </div>
     </div>
@@ -484,7 +484,7 @@
     </div>
   </footer>
 
-  <script src="../js/script.js"></script>
+   
 
   <!-- WhatsApp Floating Button -->
   <a 
@@ -499,5 +499,47 @@
     </svg>
   </a>
 
+
+  <!-- Bottom Quote Popup -->
+<div class="quote-popup-overlay" id="quotePopupOverlay"></div>
+
+<div class="quote-bottom-popup" id="quoteBottomPopup">
+  <button class="quote-popup-close" id="quotePopupClose" aria-label="Close quote form">
+    ×
+  </button>
+
+  <form 
+    class="quick-quote-form"
+    action="https://formspree.io/f/xqeopjjj"
+    method="POST"
+  >
+    <input type="hidden" name="_subject" value="New About Page Quote Request - Loyalty Contracting Group Inc.">
+
+    <div class="quick-form-group">
+      <label for="quick-first-name">First name</label>
+      <input type="text" id="quick-first-name" name="first_name" required>
+    </div>
+
+    <div class="quick-form-group">
+      <label for="quick-email">Email</label>
+      <input type="email" id="quick-email" name="email" required>
+    </div>
+
+    <div class="quick-form-group">
+      <label for="quick-phone">Phone</label>
+      <input type="tel" id="quick-phone" name="phone" required>
+    </div>
+
+    <button type="submit" class="quick-quote-submit">
+      Submit
+    </button>
+  </form>
+</div>
+
+ 
+
+  <script src="../js/script.js"></script>
+
+  
 </body>
 </html>
