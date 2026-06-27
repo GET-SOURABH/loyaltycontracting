@@ -4564,3 +4564,142 @@ button {
     border-radius: 999px !important;
   }
 }
+
+
+
+/* =================================
+   Bottom Quick Quote Popup
+================================= */
+
+.quote-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.38);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 9997;
+  transition: all 0.3s ease;
+}
+
+.quote-popup-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.quote-bottom-popup {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffffff;
+  padding: 42px 7% 46px;
+  border-radius: 28px 28px 0 0;
+  box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.22);
+  transform: translateY(110%);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 9998;
+  transition: all 0.35s ease;
+}
+
+.quote-bottom-popup.active {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.quick-quote-form {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 260px;
+  gap: 28px;
+  align-items: end;
+}
+
+.quick-form-group label {
+  display: block;
+  font-size: 17px;
+  font-weight: 500;
+  color: #111111;
+  margin-bottom: 14px;
+}
+
+.quick-form-group input {
+  width: 100%;
+  height: 56px;
+  border: 1.5px solid #777777;
+  outline: none;
+  padding: 0 16px;
+  font-size: 17px;
+  font-family: inherit;
+  background: #ffffff;
+}
+
+.quick-form-group input:focus {
+  border-color: #b87922;
+}
+
+.quick-quote-submit {
+  height: 58px;
+  background: #b87922;
+  color: #ffffff;
+  border: none;
+  font-size: 19px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.quick-quote-submit:hover {
+  background: #9f671c;
+}
+
+.quote-popup-close {
+  position: absolute;
+  top: 24px;
+  right: 42px;
+  background: transparent;
+  color: #111111;
+  font-size: 46px;
+  line-height: 1;
+  border: none;
+  cursor: pointer;
+  font-weight: 300;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .quote-bottom-popup {
+    padding: 38px 22px 32px;
+    border-radius: 26px 26px 0 0;
+  }
+
+  .quick-quote-form {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .quick-form-group label {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .quick-form-group input {
+    height: 52px;
+    font-size: 16px;
+  }
+
+  .quick-quote-submit {
+    width: 100%;
+    height: 56px;
+    font-size: 18px;
+    border-radius: 0;
+  }
+
+  .quote-popup-close {
+    top: 14px;
+    right: 22px;
+    font-size: 40px;
+  }
+}

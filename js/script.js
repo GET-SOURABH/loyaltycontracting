@@ -98,4 +98,35 @@ revealElements.forEach(el => {
 
 
 
+// Bottom Quick Quote Popup
+const quotePopupButtons = document.querySelectorAll(".open-quote-popup");
+const quotePopup = document.getElementById("quoteBottomPopup");
+const quotePopupOverlay = document.getElementById("quotePopupOverlay");
+const quotePopupClose = document.getElementById("quotePopupClose");
 
+function openQuotePopup(event) {
+  event.preventDefault();
+
+  quotePopup.classList.add("active");
+  quotePopupOverlay.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeQuotePopup() {
+  quotePopup.classList.remove("active");
+  quotePopupOverlay.classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+quotePopupButtons.forEach((button) => {
+  button.addEventListener("click", openQuotePopup);
+});
+
+quotePopupClose.addEventListener("click", closeQuotePopup);
+quotePopupOverlay.addEventListener("click", closeQuotePopup);
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    closeQuotePopup();
+  }
+});
