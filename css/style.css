@@ -3640,3 +3640,40 @@ button {
     font-size: 32px;
   }
 }
+
+
+
+/* Final mobile fix: prevent Who We Are card from overlapping hero buttons */
+
+@media (max-width: 720px) {
+  .hero-image {
+    height: 690px;
+  }
+
+  .hero-content {
+    top: 20%;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .primary-btn,
+  .secondary-btn {
+    width: 100%;
+    max-width: 310px;
+  }
+
+  .who-card {
+    position: relative !important;
+    right: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+    width: calc(100% - 28px);
+    margin: 24px auto 0 !important;
+    padding: 34px 28px;
+    border-radius: 28px;
+    z-index: 2;
+  }
+}
