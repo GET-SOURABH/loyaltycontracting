@@ -3592,3 +3592,51 @@ button {
   opacity: 1;
   transform: translateY(0); /* Glides back to its original position */
 }
+
+
+
+
+/* Fix Who We Are card position inside hero image */
+
+.hero-section {
+  position: relative;
+}
+
+/* Desktop only */
+@media (min-width: 1025px) {
+  .who-card {
+    position: absolute;
+    right: 60px;
+    bottom: 28px !important;
+    width: 480px;
+    z-index: 5;
+  }
+}
+
+/* Tablet + phone desktop mode fix */
+@media (max-width: 1024px) {
+  .who-card {
+    position: relative !important;
+    right: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+    width: calc(100% - 40px);
+    max-width: 680px;
+    margin: -70px auto 0;
+    z-index: 5;
+    border-radius: 28px;
+  }
+}
+
+/* Normal mobile */
+@media (max-width: 720px) {
+  .who-card {
+    width: calc(100% - 24px);
+    margin: -55px auto 0;
+    padding: 26px 22px;
+  }
+
+  .who-card h2 {
+    font-size: 32px;
+  }
+}
