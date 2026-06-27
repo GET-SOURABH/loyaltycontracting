@@ -130,3 +130,19 @@ document.addEventListener("keydown", function (event) {
     closeQuotePopup();
   }
 });
+
+
+// Add strong blur class when mobile menu opens
+document.addEventListener("DOMContentLoaded", function () {
+  const navToggle = document.getElementById("nav-toggle");
+
+  if (!navToggle) return;
+
+  navToggle.addEventListener("change", function () {
+    if (navToggle.checked) {
+      document.body.classList.add("mobile-nav-open");
+    } else {
+      document.body.classList.remove("mobile-nav-open");
+    }
+  });
+});

@@ -4740,3 +4740,55 @@ button {
     z-index: 10001;
   }
 }
+
+
+
+/* Strong mobile blur when hamburger is open */
+
+@media (max-width: 1024px) {
+  body.mobile-nav-open {
+    overflow: hidden;
+  }
+
+  body.mobile-nav-open .top-contact-bar,
+  body.mobile-nav-open .hero-section,
+  body.mobile-nav-open .property-match,
+  body.mobile-nav-open .showcase-section,
+  body.mobile-nav-open .process-section,
+  body.mobile-nav-open .about-section,
+  body.mobile-nav-open .google-reviews-section,
+  body.mobile-nav-open .service-areas-section,
+  body.mobile-nav-open .faq-section,
+  body.mobile-nav-open .home-quote-section,
+  body.mobile-nav-open .site-footer,
+  body.mobile-nav-open .service-hero-page,
+  body.mobile-nav-open .service-intro-section,
+  body.mobile-nav-open .service-scope-section,
+  body.mobile-nav-open .service-feature-section,
+  body.mobile-nav-open .service-gallery-section,
+  body.mobile-nav-open .service-cta-section,
+  body.mobile-nav-open .about-page-hero,
+  body.mobile-nav-open .about-story-section,
+  body.mobile-nav-open .about-mission-section,
+  body.mobile-nav-open .about-why-section,
+  body.mobile-nav-open .about-services-section,
+  body.mobile-nav-open .about-cta-section,
+  body.mobile-nav-open .whatsapp-float {
+    filter: blur(8px);
+    transition: filter 0.25s ease;
+  }
+
+  body.mobile-nav-open .navbar .logo {
+    filter: blur(6px);
+    transition: filter 0.25s ease;
+  }
+
+  body.mobile-nav-open .mobile-menu-panel,
+  body.mobile-nav-open .hamburger {
+    filter: none !important;
+  }
+
+  .mobile-menu-backdrop {
+    background: rgba(0, 0, 0, 0.28);
+  }
+}
