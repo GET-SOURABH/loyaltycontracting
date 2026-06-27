@@ -41,6 +41,29 @@
     <img src="assets/images/logo.png" alt="Loyalty Contracting Group Inc. Logo">
   </a>
 
+  <!-- Desktop Navigation -->
+  <nav class="desktop-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+
+    <div class="dropdown">
+      <a href="#">Services ▾</a>
+
+      <div class="dropdown-content">
+        <a href="services/full-house-renovation.html">Full House Renovation</a>
+        <a href="services/kitchen.html">Kitchen</a>
+        <a href="services/bathroom.html">Bathroom</a>
+        <a href="services/basement.html">Basement</a>
+        <a href="services/flooring.html">Flooring</a>
+      </div>
+    </div>
+
+    <a href="#reviews">Reviews</a>
+  </nav>
+
+  <a href="contact.html" class="contact-btn desktop-contact-btn">Contact Us</a>
+
+  <!-- Mobile Hamburger -->
   <input type="checkbox" id="nav-toggle" class="nav-toggle">
 
   <label for="nav-toggle" class="hamburger" aria-label="Open menu">
@@ -49,82 +72,42 @@
     <span></span>
   </label>
 
-  <nav class="nav-links">
-    <a href="index.html" class="menu-row">
-      <span class="menu-left">
-        <span class="menu-icon">⌂</span>
-        Home
-      </span>
-      <span class="menu-arrow">›</span>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu-panel">
+    <a href="index.html" class="mobile-menu-row">
+      <span>Home</span>
+      <span></span>
     </a>
 
-    <a href="about.html" class="menu-row">
-      <span class="menu-left">
-        <span class="menu-icon">👥</span>
-        About Us
-      </span>
-      <span class="menu-arrow">›</span>
+    <a href="about.html" class="mobile-menu-row">
+      <span>About Us</span>
+      <span></span>
     </a>
 
-    <div class="dropdown menu-row-dropdown">
-      <input type="checkbox" id="services-toggle" class="services-toggle">
+    <details class="mobile-services-details">
+      <summary class="mobile-menu-row mobile-services-summary">
+        <span>Services</span>
+        <span class="mobile-services-arrow">▾</span>
+      </summary>
 
-      <label for="services-toggle" class="services-menu-label">
-        <span class="menu-left">
-          <span class="menu-icon">🛠</span>
-          Services
-        </span>
-        <span class="services-arrow">⌃</span>
-      </label>
-
-      <div class="dropdown-content">
-        <a href="services/full-house-renovation.html">
-          <span class="submenu-icon">⌂</span>
-          Full House Renovation
-        </a>
-
-        <a href="services/kitchen.html">
-          <span class="submenu-icon">▦</span>
-          Kitchen
-        </a>
-
-        <a href="services/bathroom.html">
-          <span class="submenu-icon">▱</span>
-          Bathroom
-        </a>
-
-        <a href="services/basement.html">
-          <span class="submenu-icon">▰</span>
-          Basement
-        </a>
-
-        <a href="services/flooring.html">
-          <span class="submenu-icon">▥</span>
-          Flooring
-        </a>
+      <div class="mobile-services-list">
+        <a href="services/full-house-renovation.html">Full House Renovation</a>
+        <a href="services/kitchen.html">Kitchen</a>
+        <a href="services/bathroom.html">Bathroom</a>
+        <a href="services/basement.html">Basement</a>
+        <a href="services/flooring.html">Flooring</a>
       </div>
-    </div>
+    </details>
 
-    <a href="#reviews" class="menu-row">
-      <span class="menu-left">
-        <span class="menu-icon">☆</span>
-        Reviews
-      </span>
-      <span class="menu-arrow">›</span>
+    <a href="#reviews" class="mobile-menu-row">
+      <span>Reviews</span>
+      <span></span>
     </a>
 
-    <a href="contact.html" class="mobile-menu-contact">
-      <span>☎</span>
-      Contact Us
-    </a>
+    <a href="contact.html" class="mobile-menu-main-btn">Contact Us</a>
 
-    <a href="contact.html" class="mobile-menu-consultation">
-      <span>▣</span>
-      Get a Free Consultation
-    </a>
-  </nav>
-
-  <a href="contact.html" class="contact-btn">Contact Us</a>
+    <a href="contact.html" class="mobile-menu-outline-btn">Get a Free Consultation</a>
+  </div>
 </header>
 
   <!-- Hero Section -->

@@ -95,3 +95,7 @@ const revealObserver = new IntersectionObserver((entries, observer) => {
 revealElements.forEach(el => {
   revealObserver.observe(el);
 });
+
+
+
+
