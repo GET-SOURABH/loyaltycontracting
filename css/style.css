@@ -3833,3 +3833,113 @@ button {
     color: #ffffff !important;
   }
 }
+
+
+
+/* =================================
+   Mobile Menu Consistency + Services Toggle Fix
+================================= */
+
+.services-toggle {
+  display: none;
+}
+
+.services-menu-label {
+  text-decoration: none;
+  color: #111;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.services-menu-label:hover {
+  color: #b77725;
+}
+
+/* Desktop hover still works */
+@media (min-width: 721px) {
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+}
+
+/* Mobile menu fixes */
+@media (max-width: 720px) {
+  .nav-links {
+    gap: 0;
+  }
+
+  /* Make Home, About Us, Services, Reviews same size */
+  .nav-links > a,
+  .services-menu-label {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    border-radius: 16px;
+    font-size: 22px !important;
+    line-height: 1.2;
+    font-weight: 900 !important;
+    color: #111111;
+  }
+
+  .nav-links > a:hover,
+  .services-menu-label:hover {
+    background: rgba(184, 121, 34, 0.1);
+    color: #b87922;
+  }
+
+  .dropdown {
+    width: 100%;
+  }
+
+  /* Keep Services closed by default on mobile */
+  .dropdown-content {
+    position: static !important;
+    display: none !important;
+    min-width: 100%;
+    margin: 6px 0 18px;
+    padding: 12px;
+    background: #f8f5f0;
+    border-radius: 22px;
+    box-shadow: none;
+    border: 1px solid rgba(184, 121, 34, 0.14);
+  }
+
+  /* Open Services only after tapping */
+  .services-toggle:checked ~ .dropdown-content {
+    display: grid !important;
+  }
+
+  .services-toggle:checked + .services-menu-label span {
+    transform: rotate(180deg);
+  }
+
+  .services-menu-label span {
+    transition: transform 0.25s ease;
+  }
+
+  .dropdown-content a {
+    padding: 14px 16px;
+    border-radius: 14px;
+    font-size: 18px !important;
+    line-height: 1.25;
+    font-weight: 800 !important;
+    color: #111111;
+  }
+
+  .dropdown-content a:hover {
+    background: #b87922;
+    color: #ffffff;
+    padding-left: 16px;
+  }
+
+  .mobile-menu-contact {
+    font-size: 22px !important;
+    font-weight: 900 !important;
+    justify-content: center !important;
+    margin-top: 12px;
+    padding: 18px 22px !important;
+  }
+}
