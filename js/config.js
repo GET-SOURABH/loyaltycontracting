@@ -6,5 +6,5 @@ const CONFIG = {
   // API_BASE_URL: 'http://localhost:5001/api'
 
   // Production URL (update this once your backend is deployed)
-  API_BASE_URL: 'http://localhost:5001/api'
+  API_BASE_URL: 'https://loyaltycontracting.onrender.com/api'
 };
