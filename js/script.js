@@ -146,3 +146,76 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// Form Submission Logic
+document.addEventListener("DOMContentLoaded", function () {
+  const quoteForm = document.getElementById("quote-form");
+  const quickConsultationForm = document.getElementById("quick-consultation-form");
+
+  async function handleFormSubmit(event, endpoint) {
+    event.preventDefault();
+    const form = event.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    // Safely store original text in a data attribute to prevent double-click overwriting
+    if (!submitBtn.dataset.originalText) {
+      submitBtn.dataset.originalText = submitBtn.innerHTML;
+    }
+    const originalBtnText = submitBtn.dataset.originalText;
+
+    // Disable button and show loading state
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Sending...';
+
+    try {
+      const isMultipart = form.getAttribute('enctype') === 'multipart/form-data';
+      const formData = new FormData(form);
+      const url = `${CONFIG.API_BASE_URL}${endpoint}`;
+      
+      const requestOptions = {
+        method: 'POST',
+        body: formData
+      };
+
+      const response = await fetch(url, requestOptions);
+      const result = await response.json();
+
+      // Restore button state before alert/reset to ensure it applies properly
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnText;
+
+      if (response.ok && result.success) {
+        form.reset();
+        
+        // If it's the quick quote form, close the popup
+        if (form.id === 'quick-consultation-form' && typeof closeQuotePopup === 'function') {
+          closeQuotePopup();
+        }
+
+        // Show alert after DOM updates
+        setTimeout(() => {
+          alert(result.message || 'Form submitted successfully!');
+        }, 10);
+      } else {
+        // Handle validation errors or server errors
+        let errorMsg = result.message || 'An error occurred. Please try again.';
+        if (result.errors && result.errors.length > 0) {
+          errorMsg = result.errors.map(err => err.msg).join('\n');
+        }
+        setTimeout(() => alert('Error: ' + errorMsg), 10);
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnText;
+      setTimeout(() => alert('Network error. Please check your connection and try again.'), 10);
+    }
+  }
+
+  if (quoteForm) {
+    quoteForm.addEventListener("submit", (e) => handleFormSubmit(e, '/quote'));
+  }
+
+  if (quickConsultationForm) {
+    quickConsultationForm.addEventListener("submit", (e) => handleFormSubmit(e, '/quick-consultation'));
+  }
+});

@@ -71,20 +71,27 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu-panel">
+    <div class="mobile-menu-header">
+      <div class="mobile-avatar">L</div>
+      <div class="mobile-name">Loyalty Contracting</div>
+    </div>
+    
+    <div class="mobile-menu-content">
       <a href="../index.html" class="mobile-menu-row">
+        <span class="menu-icon">H</span>
         <span>Home</span>
-        <span></span>
       </a>
 
       <a href="../about.html" class="mobile-menu-row">
+        <span class="menu-icon">A</span>
         <span>About Us</span>
-        <span></span>
       </a>
 
       <details class="mobile-services-details">
         <summary class="mobile-menu-row mobile-services-summary">
+          <span class="menu-icon">S</span>
           <span>Services</span>
-          <span class="mobile-services-arrow">▾</span>
+          <span class="mobile-services-arrow">›</span>
         </summary>
 
         <div class="mobile-services-list">
@@ -97,15 +104,19 @@
       </details>
 
       <a href="../index.html#reviews" class="mobile-menu-row">
+        <span class="menu-icon">R</span>
         <span>Reviews</span>
-        <span></span>
       </a>
 
-      <a href="../index.html#quote" class="mobile-menu-main-btn">Contact Us</a>
+      <div class="mobile-menu-divider"></div>
 
-      
+      <a href="../index.html#quote" class="mobile-menu-row">
+        <span class="menu-icon">C</span>
+        <span>Contact Us</span>
+      </a>
     </div>
-  </header>
+  </div>
+</header>
 
   <!-- Service Hero -->
   <section class="service-hero-page">
@@ -512,8 +523,7 @@
 
   <form 
     class="quick-quote-form"
-    action="https://formspree.io/f/xqeopjjj"
-    method="POST"
+    id="quick-consultation-form"
   >
     <input type="hidden" name="_subject" value="New About Page Quote Request - Loyalty Contracting Group Inc.">
 
@@ -540,6 +550,7 @@
 
  
 
+  <script src="../js/config.js"></script>
   <script src="../js/script.js"></script>
 
   
