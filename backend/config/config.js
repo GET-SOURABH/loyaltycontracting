@@ -8,6 +8,6 @@ module.exports = {
   email: {
     smtpEmail: process.env.SMTP_EMAIL,
     smtpPassword: process.env.SMTP_PASSWORD,
-    toEmail: 'sourabh55jan@gmail.com'
+    toEmail: process.env.TO_EMAIL
   }
 };
