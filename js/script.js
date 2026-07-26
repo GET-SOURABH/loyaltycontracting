@@ -132,7 +132,7 @@ document.addEventListener("keydown", function (event) {
 });
 
 
-// Add strong blur class when mobile menu opens
+// Add strong blur class when mobile menu opens and close on link/backdrop click
 document.addEventListener("DOMContentLoaded", function () {
   const navToggle = document.getElementById("nav-toggle");
 
@@ -144,6 +144,13 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       document.body.classList.remove("mobile-nav-open");
     }
+  });
+
+  document.querySelectorAll(".mobile-menu-panel a, .mobile-menu-backdrop").forEach(link => {
+    link.addEventListener("click", () => {
+      navToggle.checked = false;
+      document.body.classList.remove("mobile-nav-open");
+    });
   });
 });
 

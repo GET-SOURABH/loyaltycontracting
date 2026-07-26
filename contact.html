@@ -30,7 +30,7 @@
     <a href="index.html" class="logo">
       <img src="assets/images/logo.png" alt="Loyalty Contracting Group Inc. Logo">
     </a>
-    <nav class="nav-links">
+    <nav class="desktop-nav">
       <a href="index.html">Home</a>
       <a href="about.html">About Us</a>
       <div class="dropdown">
@@ -45,7 +45,53 @@
       </div>
       <a href="index.html#reviews">Reviews</a>
     </nav>
-    <a href="contact.html" class="contact-btn">Contact Us</a>
+    <a href="contact.html" class="contact-btn desktop-contact-btn">Contact Us</a>
+
+    <!-- Mobile Hamburger -->
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle mobile menu">
+
+    <label for="nav-toggle" class="hamburger" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <label for="nav-toggle" class="mobile-menu-backdrop"></label>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-panel">
+      <div class="mobile-menu-header">
+        <a href="index.html" class="mobile-logo-link">
+          <img src="assets/images/logo.png" alt="Loyalty Contracting Group Inc." class="mobile-menu-logo">
+        </a>
+      </div>
+
+      <div class="mobile-menu-content">
+        <a href="index.html" class="mobile-menu-row">Home</a>
+        <a href="about.html" class="mobile-menu-row">About Us</a>
+
+        <details class="mobile-services-details">
+          <summary class="mobile-menu-row mobile-services-summary">
+            <span>Services</span>
+            <span class="mobile-services-arrow">›</span>
+          </summary>
+
+          <div class="mobile-services-list">
+            <a href="services/full-house-renovation.html">Full House Renovation</a>
+            <a href="services/kitchen.html">Kitchen</a>
+            <a href="services/bathroom.html">Bathroom</a>
+            <a href="services/basement.html">Basement</a>
+            <a href="services/flooring.html">Flooring</a>
+          </div>
+        </details>
+
+        <a href="index.html#reviews" class="mobile-menu-row">Reviews</a>
+
+        <div class="mobile-menu-divider"></div>
+
+        <a href="contact.html" class="mobile-menu-row mobile-cta-btn">Contact Us</a>
+      </div>
+    </div>
   </header>
 
   <!-- Consultation Hero Section -->
