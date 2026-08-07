@@ -24,7 +24,7 @@ beforeAfterCards.forEach((card) => {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     const targetId = this.getAttribute('href');
-    
+
     // Skip if it's just a dummy link like href="#"
     if (targetId === '#') return;
 
@@ -36,9 +36,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY;
     const startPosition = window.scrollY;
     const distance = targetPosition - startPosition;
-    
+
     // ADJUST SPEED HERE: 1500 = 1.5 seconds. Higher = slower.
-    const duration = 1500; 
+    const duration = 1500;
     let startTime = null;
 
     // Easing function (easeInOutQuart) for a very smooth cinematic glide
@@ -52,15 +52,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     function animation(currentTime) {
       if (startTime === null) startTime = currentTime;
       const timeElapsed = currentTime - startTime;
-      
+
       const run = easeInOutQuart(timeElapsed, startPosition, distance, duration);
       window.scrollTo(0, run);
-      
+
       if (timeElapsed < duration) {
         requestAnimationFrame(animation);
       } else {
         // Snap to exact position at the very end just to be safe
-        window.scrollTo(0, targetPosition); 
+        window.scrollTo(0, targetPosition);
       }
     }
 
@@ -80,10 +80,10 @@ const revealObserver = new IntersectionObserver((entries, observer) => {
     // If the element is visible on the screen
     if (entry.isIntersecting) {
       entry.target.classList.add('active');
-      
+
       // Optional: Stop observing once it has been revealed so it doesn't repeat 
       // every time you scroll up and down.
-      observer.unobserve(entry.target); 
+      observer.unobserve(entry.target);
     }
   });
 }, {
@@ -161,10 +161,10 @@ document.addEventListener("DOMContentLoaded", function () {
   forms.forEach(form => {
     form.addEventListener("submit", async function (event) {
       event.preventDefault();
-      
+
       const submitBtn = form.querySelector('button[type="submit"]');
       if (!submitBtn) return;
-      
+
       // Safely store original text in a data attribute to prevent double-click overwriting
       if (!submitBtn.dataset.originalText) {
         submitBtn.dataset.originalText = submitBtn.innerHTML;
@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", function () {
       try {
         const formData = new FormData(form);
         const url = form.getAttribute('action') || "https://formspree.io/f/xqeopjjj";
-        
+
         const response = await fetch(url, {
           method: form.getAttribute('method') || 'POST',
           body: formData,
@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
             'Accept': 'application/json'
           }
         });
-        
+
         const result = await response.json();
 
         // Restore button state before alert/reset to ensure it applies properly
@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (response.ok) {
           form.reset();
-          
+
           // Close popup if it exists
           if (typeof closeQuotePopup === 'function' && (form.id === 'quick-consultation-form' || form.closest('#quoteBottomPopup'))) {
             closeQuotePopup();
@@ -221,4 +221,57 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+});
+
+
+
+/* ========================================
+   PROJECT REELS
+======================================== */
+
+document.querySelectorAll(".reel-card").forEach((card) => {
+
+  const playButton = card.querySelector(".reel-play-button");
+  const thumbnail = card.querySelector(".reel-thumbnail");
+  const video = card.querySelector(".reel-video");
+
+  playButton.addEventListener("click", () => {
+
+    // Stop any other reel that is currently playing
+    document.querySelectorAll(".reel-video").forEach((otherVideo) => {
+
+      if (otherVideo !== video) {
+        otherVideo.pause();
+      }
+
+    });
+
+
+    // Load video only when clicked
+    if (!video.src) {
+
+      const videoSource = video.dataset.src;
+
+      video.src = videoSource;
+
+      video.load();
+    }
+
+
+    // Hide thumbnail and play button
+    thumbnail.style.display = "none";
+    playButton.style.display = "none";
+
+
+    // Show video
+    video.style.display = "block";
+
+
+    // Play video
+    video.play().catch((error) => {
+      console.log("Video playback was prevented:", error);
+    });
+
+  });
+
 });
