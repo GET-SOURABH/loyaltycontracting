@@ -814,7 +814,7 @@ button {
   min-height: 760px;
   border-radius: 28px;
   overflow: hidden;
-  background-image: url("../assets/images/contact.jpg");
+  background-image: url("../assets/images/contact.webp");
   background-size: cover;
   background-position: center;
   position: relative;
@@ -1136,6 +1136,294 @@ button {
 
   .showcase-card.before-after-card {
     height: 260px;
+  }
+}
+
+
+/* =================================
+   SEO, accessibility and utility pages
+================================= */
+
+.services-menu-button {
+  appearance: none;
+  background: transparent;
+  color: #111111;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  padding: 10px 0;
+}
+
+.services-menu-button:hover,
+.services-menu-button:focus-visible {
+  color: #b77725;
+}
+
+.desktop-nav .dropdown:focus-within .dropdown-content,
+.desktop-nav .dropdown.is-open .dropdown-content {
+  display: block;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+.hamburger:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #d59a48;
+  outline-offset: 3px;
+}
+
+.hero-content h1,
+.contact-info-panel h1 {
+  font-size: clamp(3.4rem, 5vw, 4.75rem);
+}
+
+.service-hero-text h1 {
+  font-size: clamp(3.25rem, 4.8vw, 4.25rem);
+  letter-spacing: -2.5px;
+}
+
+.main-property-card,
+.image-card {
+  color: inherit;
+  text-decoration: none;
+}
+
+.service-scope-card h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.service-scope-card h3 a:hover,
+.service-scope-card h3 a:focus-visible,
+.related-services a,
+.faq-item a,
+.legal-content a {
+  color: #9f671c;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.related-services {
+  padding-top: 4px;
+}
+
+.breadcrumbs {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 14px 36px 16px;
+  background: #ffffff;
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+  list-style: none;
+  color: #666666;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.breadcrumbs li {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.breadcrumbs li:not(:last-child)::after {
+  content: "/";
+  color: #b87922;
+}
+
+.breadcrumbs a {
+  color: #333333;
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  color: #9f671c;
+}
+
+.footer-bottom {
+  justify-content: flex-start;
+}
+
+.footer-bottom p {
+  margin-right: auto;
+}
+
+.legal-page,
+.error-page {
+  background: #f8f5f0;
+  padding: 0 18px 80px;
+}
+
+.legal-hero,
+.error-card {
+  max-width: 1280px;
+  margin: 0 auto;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #111111, #29241d);
+  color: #ffffff;
+  text-align: center;
+  padding: 86px 28px;
+}
+
+.legal-kicker,
+.error-code {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: #e7b66e;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.legal-hero h1,
+.error-card h1 {
+  max-width: 900px;
+  margin: 0 auto 18px;
+  font-size: clamp(2.6rem, 6vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -2px;
+}
+
+.legal-hero p,
+.error-card > p {
+  max-width: 720px;
+  margin: 0 auto;
+  color: #dedede;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.legal-content {
+  max-width: 900px;
+  margin: 36px auto 0;
+  padding: 48px;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.07);
+}
+
+.legal-content section + section {
+  margin-top: 34px;
+}
+
+.legal-content h2 {
+  margin-bottom: 12px;
+  color: #171717;
+  font-size: 26px;
+  line-height: 1.25;
+}
+
+.legal-content p,
+.legal-content li {
+  color: #555555;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.legal-content ul {
+  margin: 12px 0 0 22px;
+}
+
+.legal-updated {
+  margin-bottom: 30px;
+  color: #777777;
+  font-size: 14px;
+}
+
+.error-page {
+  min-height: 65vh;
+}
+
+.error-card {
+  padding: 90px 28px 70px;
+}
+
+.error-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  max-width: 820px;
+  margin: 34px auto 0;
+}
+
+.error-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.error-links a:first-child {
+  border-color: #b87922;
+  background: #b87922;
+}
+
+@media (max-width: 768px) {
+  .hero-content h1,
+  .contact-info-panel h1 {
+    font-size: 42px;
+    letter-spacing: -1.7px;
+  }
+
+  .service-hero-text h1 {
+    font-size: 38px;
+    letter-spacing: -1.4px;
+  }
+
+  .breadcrumbs {
+    padding: 11px 20px 13px;
+  }
+
+  .breadcrumbs ol {
+    font-size: 13px;
+  }
+
+  .footer-bottom p {
+    margin-right: 0;
+  }
+
+  .legal-page,
+  .error-page {
+    padding: 0 12px 55px;
+  }
+
+  .legal-hero,
+  .error-card {
+    border-radius: 22px;
+    padding: 62px 20px;
+  }
+
+  .legal-content {
+    margin-top: 22px;
+    padding: 30px 22px;
+    border-radius: 20px;
+  }
+
+  .legal-content h2 {
+    font-size: 23px;
+  }
+
+  .legal-content p,
+  .legal-content li {
+    font-size: 15px;
   }
 }
 
@@ -2327,7 +2615,7 @@ button {
 }
 
 .full-house-hero-bg {
-  background-image: url("../assets/images/house-main.jpg");
+  background-image: url("../assets/images/house-main.webp");
 }
 
 .service-hero-overlay {
@@ -2896,7 +3184,7 @@ button {
 ================================= */
 
 .kitchen-hero-bg {
-  background-image: url("../assets/images/kitchen-new.jpg");
+  background-image: url("../assets/images/kitchen-new.webp");
   background-position: center;
 }
 
@@ -2926,7 +3214,7 @@ button {
 ================================= */
 
 .bathroom-hero-bg {
-  background-image: url("../assets/images/bath-new.jpg");
+  background-image: url("../assets/images/bath-new.webp");
   background-position: center;
 }
 
@@ -2955,7 +3243,7 @@ button {
 ================================= */
 
 .basement-hero-bg {
-  background-image: url("../assets/images/property-3.jpg");
+  background-image: url("../assets/images/property-3.webp");
   background-position: center;
 }
 
@@ -2984,7 +3272,7 @@ button {
 ================================= */
 
 .flooring-hero-bg {
-  background-image: url("../assets/images/room-new.png");
+  background-image: url("../assets/images/room-new.webp");
   background-position: center;
 }
 
@@ -3025,7 +3313,7 @@ button {
   border-radius: 28px;
   overflow: hidden;
   position: relative;
-  background-image: url("../assets/images/about.jpg");
+  background-image: url("../assets/images/about.webp");
   background-size: cover;
   background-position: center;
 }
@@ -5307,4 +5595,48 @@ button {
     width: 100%;
   }
 
+}
+
+/* Final specificity-safe heading and footer overrides */
+/* Keep the homepage hero CTAs fully inside the desktop hero boundary. */
+@media (min-width: 1025px) {
+  .hero-section .hero-image > .hero-content {
+    top: auto;
+    bottom: 26px;
+  }
+}
+
+.hero-content h1,
+.contact-info-panel h1 {
+  font-size: clamp(3.4rem, 5vw, 4.75rem);
+}
+
+.service-hero-text h1 {
+  font-size: clamp(3.25rem, 4.8vw, 4.25rem);
+  letter-spacing: -2.5px;
+}
+
+.footer-bottom {
+  justify-content: flex-start;
+}
+
+.footer-bottom p {
+  margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .hero-content h1,
+  .contact-info-panel h1 {
+    font-size: 42px;
+    letter-spacing: -1.7px;
+  }
+
+  .service-hero-text h1 {
+    font-size: 38px;
+    letter-spacing: -1.4px;
+  }
+
+  .footer-bottom p {
+    margin-right: 0;
+  }
 }

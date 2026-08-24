@@ -1,277 +1,298 @@
-const tabButtons = document.querySelectorAll(".tabs button");
+function trackEvent(eventName, parameters = {}) {
+  if (typeof window.gtag !== "function") return;
 
-tabButtons.forEach((button) => {
+  try {
+    window.gtag("event", eventName, parameters);
+  } catch (_) {
+    // Analytics must never interrupt navigation or form submission.
+  }
+}
+
+function getFormName(form) {
+  if (form.id === "quote-form") return "main_quote_form";
+  if (form.id === "contact-form") return "contact_form";
+  if (form.id === "quick-consultation-form") return "popup_quote_form";
+  return "website_form";
+}
+
+document.querySelectorAll(".tabs button").forEach((button) => {
   button.addEventListener("click", () => {
-    tabButtons.forEach((btn) => btn.classList.remove("active"));
+    document.querySelectorAll(".tabs button").forEach((item) => item.classList.remove("active"));
     button.classList.add("active");
   });
 });
 
-
-// Before / After sliders
-const beforeAfterCards = document.querySelectorAll(".before-after-card");
-
-beforeAfterCards.forEach((card) => {
+document.querySelectorAll(".before-after-card").forEach((card) => {
   const slider = card.querySelector(".ba-range");
+  if (!slider) return;
 
   slider.addEventListener("input", () => {
-    card.style.setProperty("--position", slider.value + "%");
+    card.style.setProperty("--position", `${slider.value}%`);
   });
 });
 
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", (event) => {
+    const targetId = anchor.getAttribute("href");
+    if (!targetId || targetId === "#") return;
 
-// Aesthetic Smooth Scrolling for all anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    const targetId = this.getAttribute('href');
+    const target = document.querySelector(targetId);
+    if (!target) return;
 
-    // Skip if it's just a dummy link like href="#"
-    if (targetId === '#') return;
-
-    const targetElement = document.querySelector(targetId);
-    if (!targetElement) return;
-
-    e.preventDefault(); // Stop default instant jump
-
-    const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY;
-    const startPosition = window.scrollY;
-    const distance = targetPosition - startPosition;
-
-    // ADJUST SPEED HERE: 1500 = 1.5 seconds. Higher = slower.
-    const duration = 1500;
-    let startTime = null;
-
-    // Easing function (easeInOutQuart) for a very smooth cinematic glide
-    function easeInOutQuart(t, b, c, d) {
-      t /= d / 2;
-      if (t < 1) return c / 2 * t * t * t * t + b;
-      t -= 2;
-      return -c / 2 * (t * t * t * t - 2) + b;
-    }
-
-    function animation(currentTime) {
-      if (startTime === null) startTime = currentTime;
-      const timeElapsed = currentTime - startTime;
-
-      const run = easeInOutQuart(timeElapsed, startPosition, distance, duration);
-      window.scrollTo(0, run);
-
-      if (timeElapsed < duration) {
-        requestAnimationFrame(animation);
-      } else {
-        // Snap to exact position at the very end just to be safe
-        window.scrollTo(0, targetPosition);
-      }
-    }
-
-    requestAnimationFrame(animation);
+    event.preventDefault();
+    target.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      block: "start",
+    });
+    window.history.replaceState(null, "", targetId);
   });
 });
 
+const revealElements = document.querySelectorAll(".reveal");
 
-
-
-
-// Scroll Reveal Effect
-const revealElements = document.querySelectorAll('.reveal');
-
-const revealObserver = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    // If the element is visible on the screen
-    if (entry.isIntersecting) {
-      entry.target.classList.add('active');
-
-      // Optional: Stop observing once it has been revealed so it doesn't repeat 
-      // every time you scroll up and down.
-      observer.unobserve(entry.target);
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("active");
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: 0.15,
+      rootMargin: "0px 0px -50px 0px",
     }
+  );
+
+  revealElements.forEach((element) => revealObserver.observe(element));
+} else {
+  revealElements.forEach((element) => element.classList.add("active"));
+}
+
+document.querySelectorAll(".desktop-nav .dropdown").forEach((dropdown) => {
+  const button = dropdown.querySelector(".services-menu-button");
+  if (!button) return;
+
+  const closeMenu = () => {
+    dropdown.classList.remove("is-open");
+    button.setAttribute("aria-expanded", "false");
+  };
+
+  button.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const willOpen = !dropdown.classList.contains("is-open");
+    dropdown.classList.toggle("is-open", willOpen);
+    button.setAttribute("aria-expanded", String(willOpen));
   });
-}, {
-  root: null,
-  threshold: 0.15, // Triggers when 15% of the element is visible
-  rootMargin: "0px 0px -50px 0px" // Triggers slightly before it hits the very bottom
+
+  dropdown.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    closeMenu();
+    button.focus();
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!dropdown.contains(event.target)) closeMenu();
+  });
 });
 
-revealElements.forEach(el => {
-  revealObserver.observe(el);
-});
-
-
-
-// Bottom Quick Quote Popup
 const quotePopupButtons = document.querySelectorAll(".open-quote-popup");
 const quotePopup = document.getElementById("quoteBottomPopup");
 const quotePopupOverlay = document.getElementById("quotePopupOverlay");
 const quotePopupClose = document.getElementById("quotePopupClose");
+let lastFocusedElement = null;
 
 function openQuotePopup(event) {
-  event.preventDefault();
+  if (event) event.preventDefault();
+  if (!quotePopup || !quotePopupOverlay) return;
 
+  lastFocusedElement = document.activeElement;
   quotePopup.classList.add("active");
   quotePopupOverlay.classList.add("active");
+  quotePopupOverlay.setAttribute("aria-hidden", "false");
+  quotePopup.removeAttribute("inert");
+  quotePopup.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
+
+  const firstField = quotePopup.querySelector("input, button, select, textarea");
+  if (firstField) firstField.focus();
 }
 
 function closeQuotePopup() {
+  if (!quotePopup || !quotePopupOverlay) return;
+
   quotePopup.classList.remove("active");
   quotePopupOverlay.classList.remove("active");
+  quotePopupOverlay.setAttribute("aria-hidden", "true");
+  quotePopup.setAttribute("aria-hidden", "true");
+  quotePopup.setAttribute("inert", "");
   document.body.style.overflow = "";
+
+  if (lastFocusedElement instanceof HTMLElement) lastFocusedElement.focus();
 }
 
-quotePopupButtons.forEach((button) => {
-  button.addEventListener("click", openQuotePopup);
-});
+quotePopupButtons.forEach((button) => button.addEventListener("click", openQuotePopup));
+if (quotePopupClose) quotePopupClose.addEventListener("click", closeQuotePopup);
+if (quotePopupOverlay) quotePopupOverlay.addEventListener("click", closeQuotePopup);
 
-quotePopupClose.addEventListener("click", closeQuotePopup);
-quotePopupOverlay.addEventListener("click", closeQuotePopup);
+document.addEventListener("keydown", (event) => {
+  if (!quotePopup || !quotePopup.classList.contains("active")) return;
 
-document.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
     closeQuotePopup();
+    return;
+  }
+
+  if (event.key !== "Tab") return;
+  const focusable = Array.from(
+    quotePopup.querySelectorAll('button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href]')
+  ).filter((element) => element.offsetParent !== null);
+  if (!focusable.length) return;
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
   }
 });
 
-
-// Add strong blur class when mobile menu opens and close on link/backdrop click
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const navToggle = document.getElementById("nav-toggle");
-
+  const hamburger = document.querySelector('label[for="nav-toggle"].hamburger');
+  const mobileMenu = document.getElementById("mobile-menu");
   if (!navToggle) return;
 
-  navToggle.addEventListener("change", function () {
-    if (navToggle.checked) {
-      document.body.classList.add("mobile-nav-open");
-    } else {
-      document.body.classList.remove("mobile-nav-open");
+  const updateMobileMenu = () => {
+    document.body.classList.toggle("mobile-nav-open", navToggle.checked);
+    if (hamburger) hamburger.setAttribute("aria-expanded", String(navToggle.checked));
+    if (mobileMenu) {
+      if (navToggle.checked) mobileMenu.removeAttribute("inert");
+      else mobileMenu.setAttribute("inert", "");
+    }
+  };
+
+  navToggle.addEventListener("change", updateMobileMenu);
+
+  if (hamburger) {
+    hamburger.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      navToggle.checked = !navToggle.checked;
+      updateMobileMenu();
+    });
+  }
+
+  document.querySelectorAll(".mobile-menu-panel a, .mobile-menu-backdrop").forEach((control) => {
+    control.addEventListener("click", () => {
+      navToggle.checked = false;
+      updateMobileMenu();
+    });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !navToggle.checked) return;
+    navToggle.checked = false;
+    updateMobileMenu();
+    if (hamburger) hamburger.focus();
+  });
+
+  updateMobileMenu();
+});
+
+document.querySelectorAll('a[href^="tel:"]').forEach((link) => {
+  link.addEventListener("click", () => trackEvent("click_to_call", { link_location: "website" }));
+});
+
+document.querySelectorAll('a[href^="mailto:"]').forEach((link) => {
+  link.addEventListener("click", () => trackEvent("click_email", { link_location: "website" }));
+});
+
+document.querySelectorAll('a[href*="wa.me/"]').forEach((link) => {
+  link.addEventListener("click", () => trackEvent("click_whatsapp", { link_location: "website" }));
+});
+
+document.querySelectorAll(".quote-cta").forEach((control) => {
+  control.addEventListener("click", () => trackEvent("quote_cta_click", { cta_text: control.textContent.trim() }));
+});
+
+document.querySelectorAll("form").forEach((form) => {
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (!submitButton) return;
+
+    const formName = getFormName(form);
+    trackEvent("form_submit", { form_name: formName });
+
+    if (!submitButton.dataset.originalText) {
+      submitButton.dataset.originalText = submitButton.innerHTML;
+    }
+
+    submitButton.disabled = true;
+    submitButton.innerHTML = "Sending...";
+
+    try {
+      const response = await fetch(form.getAttribute("action") || "https://formspree.io/f/xqeopjjj", {
+        method: form.getAttribute("method") || "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        const message = Array.isArray(result.errors)
+          ? result.errors.map((error) => error.message).join("\n")
+          : "An error occurred. Please try again.";
+        window.setTimeout(() => window.alert(`Error: ${message}`), 10);
+        return;
+      }
+
+      trackEvent("generate_lead", { form_name: formName });
+      form.reset();
+      if (form.id === "quick-consultation-form" || form.closest("#quoteBottomPopup")) {
+        closeQuotePopup();
+      }
+      window.setTimeout(() => window.alert("Form submitted successfully!"), 10);
+    } catch (error) {
+      console.error("Submission error:", error);
+      window.setTimeout(
+        () => window.alert("Network error. Please check your connection and try again."),
+        10
+      );
+    } finally {
+      submitButton.disabled = false;
+      submitButton.innerHTML = submitButton.dataset.originalText;
     }
   });
-
-  document.querySelectorAll(".mobile-menu-panel a, .mobile-menu-backdrop").forEach(link => {
-    link.addEventListener("click", () => {
-      navToggle.checked = false;
-      document.body.classList.remove("mobile-nav-open");
-    });
-  });
 });
-
-// Form Submission Logic
-document.addEventListener("DOMContentLoaded", function () {
-  const forms = document.querySelectorAll("form");
-
-  forms.forEach(form => {
-    form.addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      const submitBtn = form.querySelector('button[type="submit"]');
-      if (!submitBtn) return;
-
-      // Safely store original text in a data attribute to prevent double-click overwriting
-      if (!submitBtn.dataset.originalText) {
-        submitBtn.dataset.originalText = submitBtn.innerHTML;
-      }
-      const originalBtnText = submitBtn.dataset.originalText;
-
-      // Disable button and show loading state
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = 'Sending...';
-
-      try {
-        const formData = new FormData(form);
-        const url = form.getAttribute('action') || "https://formspree.io/f/xqeopjjj";
-
-        const response = await fetch(url, {
-          method: form.getAttribute('method') || 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-
-        const result = await response.json();
-
-        // Restore button state before alert/reset to ensure it applies properly
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
-
-        if (response.ok) {
-          form.reset();
-
-          // Close popup if it exists
-          if (typeof closeQuotePopup === 'function' && (form.id === 'quick-consultation-form' || form.closest('#quoteBottomPopup'))) {
-            closeQuotePopup();
-          }
-
-          // Show alert after DOM updates
-          setTimeout(() => {
-            alert('Form submitted successfully!');
-          }, 10);
-        } else {
-          // Handle validation errors or server errors
-          let errorMsg = 'An error occurred. Please try again.';
-          if (result.errors && result.errors.length > 0) {
-            errorMsg = result.errors.map(err => err.message).join('\n');
-          }
-          setTimeout(() => alert('Error: ' + errorMsg), 10);
-        }
-      } catch (error) {
-        console.error('Submission error:', error);
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
-        setTimeout(() => alert('Network error. Please check your connection and try again.'), 10);
-      }
-    });
-  });
-});
-
-
-
-/* ========================================
-   PROJECT REELS
-======================================== */
 
 document.querySelectorAll(".reel-card").forEach((card) => {
-
   const playButton = card.querySelector(".reel-play-button");
   const thumbnail = card.querySelector(".reel-thumbnail");
   const video = card.querySelector(".reel-video");
+  if (!playButton || !thumbnail || !video) return;
 
   playButton.addEventListener("click", () => {
-
-    // Stop any other reel that is currently playing
     document.querySelectorAll(".reel-video").forEach((otherVideo) => {
-
-      if (otherVideo !== video) {
-        otherVideo.pause();
-      }
-
+      if (otherVideo !== video) otherVideo.pause();
     });
 
-
-    // Load video only when clicked
-    if (!video.src) {
-
-      const videoSource = video.dataset.src;
-
-      video.src = videoSource;
-
+    if (!video.src && video.dataset.src) {
+      video.src = video.dataset.src;
       video.load();
     }
 
-
-    // Hide thumbnail and play button
-    thumbnail.style.display = "none";
-    playButton.style.display = "none";
-
-
-    // Show video
+    thumbnail.hidden = true;
+    playButton.hidden = true;
     video.style.display = "block";
-
-
-    // Play video
-    video.play().catch((error) => {
-      console.log("Video playback was prevented:", error);
+    video.play().catch(() => {
+      // Native controls remain available if autoplay after the click is blocked.
     });
-
   });
-
 });
