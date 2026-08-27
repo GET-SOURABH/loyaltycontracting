@@ -829,6 +829,61 @@ button {
   margin-bottom: 36px;
 }
 
+.contact-business-address {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  width: 100%;
+  max-width: 680px;
+  min-width: 0;
+  margin: 0 0 24px;
+  padding: 18px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-style: normal;
+  text-align: left;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.contact-business-address > i {
+  flex: 0 0 auto;
+  margin-top: 3px;
+  color: #ffffff;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.contact-business-address-content {
+  min-width: 0;
+}
+
+.contact-business-address-label {
+  display: block;
+  margin-bottom: 4px;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.contact-business-address a {
+  color: #eeeeee;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.55;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.contact-business-address a:hover,
+.contact-business-address a:focus-visible {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .contact-mini-stats {
   display: flex;
   gap: 24px;
@@ -5729,6 +5784,18 @@ textarea:focus-visible {
     margin-bottom: 24px;
     font-size: 16px;
     line-height: 1.55;
+  }
+
+  .contact-business-address {
+    gap: 12px;
+    max-width: none;
+    margin-bottom: 20px;
+    padding: 14px 16px;
+    border-radius: 16px;
+  }
+
+  .contact-business-address > i {
+    font-size: 20px;
   }
 
   .contact-mini-stats {
