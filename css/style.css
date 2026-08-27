@@ -612,56 +612,6 @@ button {
   }
 
 
-  .contact-hero-page {
-    padding: 0 12px 30px;
-  }
-
-  .contact-hero-bg {
-    min-height: auto;
-    border-radius: 22px;
-  }
-
-  .contact-page-badge {
-    top: 28px;
-    font-size: 14px;
-    padding: 8px 16px;
-    white-space: nowrap;
-  }
-
-  .contact-hero-content {
-    min-height: auto;
-    grid-template-columns: 1fr;
-    gap: 28px;
-    padding: 90px 22px 30px;
-  }
-
-  .contact-info-panel h1 {
-    font-size: 42px;
-    letter-spacing: -1.5px;
-  }
-
-  .contact-info-panel p {
-    font-size: 16px;
-  }
-
-  .contact-mini-stats {
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .contact-form-panel {
-    padding: 30px 22px;
-    border-radius: 22px;
-  }
-
-  .contact-form-panel h2 {
-    font-size: 34px;
-  }
-
-  .premium-submit-btn {
-    font-size: 16px;
-  }
-
   .contact-page-section {
     padding: 50px 16px;
     min-height: auto;
@@ -926,6 +876,12 @@ button {
 
 .premium-contact-form {
   width: 100%;
+}
+
+.premium-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
 }
 
 .premium-form-group {
@@ -5638,5 +5594,162 @@ textarea:focus-visible {
 
   .footer-bottom p {
     margin-right: 0;
+  }
+}
+
+/* Contact page responsive rules must remain after the desktop contact styles. */
+@media (max-width: 900px) {
+  .contact-hero-content {
+    min-height: auto;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+    align-items: start;
+    padding: 120px clamp(32px, 6vw, 70px) 70px;
+  }
+
+  .contact-info-panel,
+  .contact-form-panel {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .contact-info-panel {
+    order: 1;
+  }
+
+  .contact-form-panel {
+    order: 2;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .premium-contact-form,
+  .premium-form-row,
+  .premium-form-group {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-hero-page {
+    position: relative;
+    z-index: 2;
+    padding: 0 8px 24px;
+  }
+
+  .contact-hero-bg {
+    min-height: auto;
+    border-radius: 18px;
+  }
+
+  .contact-page-badge {
+    top: 20px;
+    max-width: calc(100% - 28px);
+    padding: 8px 14px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .contact-hero-content {
+    min-height: auto;
+    gap: 24px;
+    padding: 74px 14px 24px;
+  }
+
+  .contact-info-panel h1 {
+    max-width: 100%;
+    margin-bottom: 18px;
+    font-size: clamp(32px, 9vw, 38px);
+    line-height: 1.1;
+    letter-spacing: -1.2px;
+    overflow-wrap: break-word;
+  }
+
+  .contact-info-panel p {
+    margin-bottom: 24px;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .contact-mini-stats {
+    width: 100%;
+    max-width: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .contact-mini-stats div {
+    width: 100%;
+    min-width: 0;
+    padding: 14px 16px;
+    border-radius: 16px;
+  }
+
+  .contact-mini-stats h3 {
+    font-size: 28px;
+  }
+
+  .contact-form-panel {
+    max-width: 100%;
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .contact-form-panel h2 {
+    margin-bottom: 24px;
+    font-size: 30px;
+    line-height: 1.15;
+    letter-spacing: -1px;
+  }
+
+  .premium-form-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .premium-form-group {
+    margin-bottom: 18px;
+  }
+
+  .premium-form-group label {
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .premium-form-group input,
+  .premium-form-group select,
+  .premium-form-group textarea,
+  .premium-submit-btn {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    font-size: 16px;
+  }
+
+  .premium-form-group input,
+  .premium-form-group select,
+  .premium-form-group textarea {
+    padding: 14px 15px;
+  }
+
+  .premium-submit-btn {
+    min-height: 52px;
+    margin-top: 4px;
+    padding: 16px 18px;
+  }
+
+  .contact-hero-page ~ .whatsapp-float {
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    width: 52px;
+    height: 52px;
+    z-index: 1;
+  }
+
+  .contact-hero-page ~ .whatsapp-float .whatsapp-icon {
+    width: 29px;
+    height: 29px;
   }
 }
