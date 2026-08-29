@@ -15,12 +15,44 @@ function getFormName(form) {
   return "website_form";
 }
 
-document.querySelectorAll(".tabs button").forEach((button) => {
-  button.addEventListener("click", () => {
-    document.querySelectorAll(".tabs button").forEach((item) => item.classList.remove("active"));
-    button.classList.add("active");
-  });
-});
+const heroVideo = document.querySelector(".hero-video[data-src]");
+
+if (heroVideo) {
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const shouldLoadHeroVideo =
+    window.matchMedia("(min-width: 721px)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+    !connection?.saveData &&
+    !["slow-2g", "2g"].includes(connection?.effectiveType);
+
+  if (shouldLoadHeroVideo) {
+    const loadHeroVideo = () => {
+      heroVideo.src = heroVideo.dataset.src;
+      heroVideo.addEventListener(
+        "canplay",
+        () => {
+          heroVideo.classList.add("is-ready");
+          heroVideo.play().catch(() => {
+            // The responsive poster remains visible if autoplay is unavailable.
+          });
+        },
+        { once: true }
+      );
+      heroVideo.load();
+    };
+
+    const scheduleHeroVideo = () => {
+      if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(loadHeroVideo, { timeout: 1500 });
+      } else {
+        window.setTimeout(loadHeroVideo, 0);
+      }
+    };
+
+    if (document.readyState === "complete") scheduleHeroVideo();
+    else window.addEventListener("load", scheduleHeroVideo, { once: true });
+  }
+}
 
 document.querySelectorAll(".before-after-card").forEach((card) => {
   const slider = card.querySelector(".ba-range");
