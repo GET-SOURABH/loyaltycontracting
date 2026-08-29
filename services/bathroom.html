@@ -2,14 +2,35 @@
 <html lang="en">
 
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2PJT5X35ZD"></script>
+  <!-- Google tag (gtag.js): queue immediately, download after the critical page load. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-2PJT5X35ZD');
+
+    (function loadGoogleAnalyticsAfterPageLoad() {
+      function loadGoogleAnalytics() {
+        if (document.querySelector('script[data-google-tag]')) return;
+
+        var googleTag = document.createElement('script');
+        googleTag.async = true;
+        googleTag.src = 'https://www.googletagmanager.com/gtag/js?id=G-2PJT5X35ZD';
+        googleTag.dataset.googleTag = 'true';
+        document.head.appendChild(googleTag);
+      }
+
+      function scheduleGoogleAnalytics() {
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(loadGoogleAnalytics, { timeout: 2000 });
+        } else {
+          window.setTimeout(loadGoogleAnalytics, 0);
+        }
+      }
+
+      window.addEventListener('load', scheduleGoogleAnalytics, { once: true });
+    }());
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -89,13 +110,15 @@
 }
   </script>
 
-  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="preload" as="image" href="/assets/images/bath-new-768.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+  <link rel="preload" as="image" href="/assets/images/bath-new.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
+
+  <link rel="stylesheet" href="/css/services.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"></noscript>
 </head>
 
 <body>
@@ -205,6 +228,10 @@
   <!-- Service Hero -->
   <section class="service-hero-page">
     <div class="service-hero-bg bathroom-hero-bg">
+      <picture class="service-hero-media">
+        <source media="(max-width: 768px)" srcset="/assets/images/bath-new-768.webp" type="image/webp" width="768" height="576">
+        <img src="/assets/images/bath-new.webp" alt="Modern renovated bathroom" width="1448" height="1086" decoding="async" fetchpriority="high">
+      </picture>
       <div class="service-hero-overlay"></div>
 
       <div class="service-page-badge">Bathroom Renovation</div>
@@ -578,7 +605,7 @@
            rel="noopener"
            class="social-link">
           <span>Google Reviews</span>
-          <i class="fa-brands fa-google" aria-hidden="true"></i>
+          <span class="social-icon social-icon-letter" aria-hidden="true">G</span>
         </a>
 
         <a href="https://www.instagram.com/loyaltycontracting.ca"
@@ -586,7 +613,11 @@
            rel="noopener"
            class="social-link">
           <span>Instagram</span>
-          <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+          <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+            <circle cx="12" cy="12" r="4"></circle>
+            <circle class="social-icon-dot" cx="17.4" cy="6.7" r="1"></circle>
+          </svg>
         </a>
 
         <a href="https://www.tiktok.com/@loyaltycontracting.ca?_r=1&amp;_t=ZS-988ecNcpPHU"
@@ -594,7 +625,9 @@
            rel="noopener"
            class="social-link">
           <span>TikTok</span>
-          <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
+          <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14 3v10.3a4.7 4.7 0 1 1-4-4.65v3.1a1.7 1.7 0 1 0 1 1.55V3h3Zm0 0c.3 2.5 1.8 4 4 4.4v3.1A8.1 8.1 0 0 1 14 9"></path>
+          </svg>
         </a>
       </div>
 
@@ -650,7 +683,7 @@
     </form>
   </div>
 
-  <script src="/js/script.js"></script>
+  <script defer src="/js/services.js"></script>
 
 
 </body>
