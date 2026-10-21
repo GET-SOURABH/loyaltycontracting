@@ -63,6 +63,64 @@ document.querySelectorAll(".before-after-card").forEach((card) => {
   });
 });
 
+const reviewOpenButton = document.getElementById("himanshu-review-toggle");
+const reviewPanel = document.getElementById("himanshu-review");
+
+if (reviewOpenButton && reviewPanel) {
+  const closeButton = reviewPanel.querySelector(".review-close");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let animation;
+
+  const setReviewExpanded = (expanded) => {
+    const startHeight = reviewPanel.hidden ? 0 : reviewPanel.getBoundingClientRect().height;
+    if (animation) animation.cancel();
+
+    reviewOpenButton.setAttribute("aria-expanded", String(expanded));
+    closeButton.setAttribute("aria-expanded", String(expanded));
+    reviewOpenButton.querySelector("span").textContent = expanded ? "Read less" : "Read more";
+    reviewOpenButton.querySelector("path").setAttribute("d", expanded ? "m3 7.5 3-3 3 3" : "m3 4.5 3 3 3-3");
+    reviewPanel.hidden = false;
+    reviewPanel.inert = !expanded;
+    if (expanded) reviewPanel.setAttribute("aria-hidden", "false");
+
+    const focusTarget = expanded ? reviewPanel : reviewOpenButton;
+    focusTarget.focus({ preventScroll: true });
+    if (!expanded) reviewPanel.setAttribute("aria-hidden", "true");
+
+    if (!reducedMotion.matches && typeof reviewPanel.animate === "function") {
+      animation = reviewPanel.animate(
+        [
+          { height: `${startHeight}px`, overflow: "hidden" },
+          { height: `${expanded ? reviewPanel.getBoundingClientRect().height : 0}px`, overflow: "hidden" },
+        ],
+        { duration: 240, easing: "ease-in-out" }
+      );
+      animation.onfinish = () => { reviewPanel.hidden = !expanded; };
+    } else {
+      reviewPanel.hidden = !expanded;
+    }
+
+    // Return to the trigger without an abrupt focus-induced scroll on collapse.
+    focusTarget.scrollIntoView({
+      behavior: reducedMotion.matches ? "instant" : "smooth",
+      block: "nearest",
+    });
+  };
+
+  reviewOpenButton.addEventListener("click", () => {
+    setReviewExpanded(reviewOpenButton.getAttribute("aria-expanded") !== "true");
+  });
+  closeButton.addEventListener("click", () => setReviewExpanded(false));
+  reviewOpenButton.hidden = false;
+
+  reducedMotion.addEventListener("change", () => {
+    if (reducedMotion.matches && animation) {
+      animation.cancel();
+      reviewPanel.hidden = reviewOpenButton.getAttribute("aria-expanded") !== "true";
+    }
+  });
+}
+
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", (event) => {
     const targetId = anchor.getAttribute("href");

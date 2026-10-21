@@ -1541,6 +1541,7 @@ textarea:focus-visible {
 .reviews-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  align-items: start;
   gap: 28px;
 }
 
@@ -1597,11 +1598,58 @@ textarea:focus-visible {
   margin-bottom: 16px;
 }
 
-.review-card p {
+.review-card p,
+.review-panel p {
   font-size: 15.5px;
   line-height: 1.65;
   color: #333;
   font-weight: 500;
+}
+
+.review-content {
+  overflow-wrap: anywhere;
+}
+
+.review-panel:not([hidden]) {
+  display: flow-root;
+  overflow-anchor: none;
+}
+
+.review-panel-surface {
+  margin-top: 28px;
+  padding: 32px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 28px;
+}
+
+.review-panel-content {
+  max-width: 76ch;
+  margin: 0 auto;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.review-panel p + p {
+  margin-top: 1em;
+}
+
+.review-toggle:not([hidden]) {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 4px 0;
+  background: transparent;
+  color: #777;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.review-toggle:hover,
+.review-toggle:focus-visible {
+  color: #b87922;
 }
 
 .google-review-cta {
@@ -1648,7 +1696,8 @@ textarea:focus-visible {
     font-size: 34px;
   }
 
-  .review-card {
+  .review-card,
+  .review-panel-surface {
     padding: 26px;
   }
 }
