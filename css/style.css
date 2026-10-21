@@ -5947,3 +5947,149 @@ textarea:focus-visible {
     justify-self: center;
   }
 }
+
+/* Homepage mobile card strips. Desktop and tablet grids retain their rules above. */
+@media (max-width: 767px) {
+  .home-page :is(.property-grid, .reels-grid, .reviews-grid) {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    width: calc(100% + 16px);
+    min-width: 0;
+    margin-inline: -8px;
+    padding: 10px 8px 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 8px;
+    overscroll-behavior-x: contain;
+    touch-action: auto;
+    scrollbar-width: none;
+  }
+
+  .home-page :is(.property-grid, .reels-grid, .reviews-grid)::-webkit-scrollbar {
+    display: none;
+  }
+
+  .home-page :is(.property-grid, .reels-grid, .reviews-grid):focus-visible {
+    outline: 3px solid #d59a48;
+    outline-offset: 3px;
+  }
+
+  /* Flatten the existing service subgroup into a single row without moving links. */
+  .home-page .property-grid .small-grid {
+    display: contents;
+  }
+
+  .home-page :is(.property-grid .main-property-card, .property-grid .image-card,
+    .reels-grid > .reel-card, .reviews-grid > .review-card) {
+    flex: 0 0 86%;
+    min-width: 0;
+    max-width: none;
+    margin: 0;
+    scroll-snap-align: start;
+  }
+
+  .home-page .property-grid :is(.main-property-card, .image-card) {
+    height: clamp(360px, 110vw, 440px);
+  }
+
+  /* Let the original service descriptions wrap fully inside the narrower cards. */
+  .home-page .property-grid :is(.price-card, .mini-service-card) {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    height: auto;
+    padding: 16px;
+  }
+
+  .home-page .property-grid :is(h3, h4) {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .home-page .property-grid :is(.price-card, .mini-service-card) p {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .home-page .reviews-grid .review-card {
+    padding: 22px 20px;
+  }
+
+  .home-page .reviews-grid .review-top {
+    gap: 12px;
+  }
+
+  .home-page .reviews-grid .review-avatar {
+    flex-shrink: 0;
+  }
+
+  .home-page .reviews-grid .review-top > div:last-child {
+    min-width: 0;
+  }
+
+  .home-page :is(.reel-card, .review-card, .process-card):hover {
+    transform: none;
+  }
+
+  .home-page .process-header {
+    margin-bottom: 24px;
+  }
+
+  .home-page .process-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .home-page .process-card {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    column-gap: 12px;
+    row-gap: 3px;
+    align-items: start;
+    padding: 14px 16px;
+    border-radius: 18px;
+    text-align: left;
+  }
+
+  .home-page .process-number {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: center;
+    width: 36px;
+    height: 36px;
+    margin: 0;
+    font-size: 18px;
+  }
+
+  .home-page .process-card h3 {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  .home-page .process-card p {
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  .home-page :is(.property-grid, .reels-grid, .reviews-grid) {
+    scroll-behavior: auto;
+  }
+
+  .home-page :is(.reel-card, .reel-thumbnail, .review-card, .process-card) {
+    transition: none;
+  }
+
+  .home-page .reel-card:hover .reel-thumbnail {
+    transform: none;
+  }
+}
