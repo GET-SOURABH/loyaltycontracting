@@ -1,0 +1,57 @@
+/* Shared by the existing page bundles; keep the navigation's original geometry. */
+:root {
+  --sticky-header-clearance: 107px; /* 85px logo + 10px padding + 12px gap. */
+  scroll-padding-top: var(--sticky-header-clearance);
+}
+
+/* More specific than the existing .navbar mobile position: relative rules. */
+header.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Below the quote overlay (9997) and dialog (9998). */
+}
+
+/* Fade the background and shadow together without changing header geometry. */
+header.navbar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+header.navbar.is-scrolled::before {
+  opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --sticky-header-clearance: 128px; /* 68px hamburger + 48px padding + 12px gap. */
+  }
+
+  /* Preserve the drawer/backdrop's priority over floating shortcuts. */
+  body.mobile-nav-open header.navbar {
+    z-index: 10000;
+  }
+
+  /* A quote dialog must still take precedence if both overlays are open. */
+  body.mobile-nav-open:has(.quote-bottom-popup.active) header.navbar {
+    z-index: 1000;
+  }
+}
+
+@media (max-width: 520px) {
+  :root {
+    --sticky-header-clearance: 104px; /* 56px hamburger + 36px padding + 12px gap. */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header.navbar::before {
+    transition: none;
+  }
+}

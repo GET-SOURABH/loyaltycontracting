@@ -1,3 +1,5 @@
+@import url("./sticky-header.css");
+
 /* Shared subset for all five service pages; general page bundles remain unchanged. */
 * {margin: 0;
   padding: 0;

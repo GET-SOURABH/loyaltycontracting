@@ -504,7 +504,7 @@
   grid-column: 2;
   grid-row: 1;
   position: sticky;
-  top: 24px;
+  top: var(--sticky-header-clearance, 24px);
 }
 
 .article-toc {

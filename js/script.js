@@ -1,3 +1,6 @@
+// CSS sticky positioning remains available if this visual enhancement cannot load.
+import("./sticky-header.js").catch(() => {});
+
 function trackEvent(eventName, parameters = {}) {
   if (typeof window.gtag !== "function") return;
 
