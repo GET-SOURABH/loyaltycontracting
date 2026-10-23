@@ -66,61 +66,95 @@ document.querySelectorAll(".before-after-card").forEach((card) => {
   });
 });
 
-const reviewOpenButton = document.getElementById("himanshu-review-toggle");
-const reviewPanel = document.getElementById("himanshu-review");
+const expandableReviews = Array.from(document.querySelectorAll(".review-card .review-toggle[aria-controls]"))
+  .map((openButton) => {
+    const panel = document.getElementById(openButton.getAttribute("aria-controls"));
+    const closeButton = panel?.querySelector(".review-close");
+    return panel && closeButton ? { openButton, panel, closeButton, animation: null } : null;
+  })
+  .filter(Boolean);
 
-if (reviewOpenButton && reviewPanel) {
-  const closeButton = reviewPanel.querySelector(".review-close");
+if (expandableReviews.length) {
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  let animation;
 
-  const setReviewExpanded = (expanded) => {
-    const startHeight = reviewPanel.hidden ? 0 : reviewPanel.getBoundingClientRect().height;
-    if (animation) animation.cancel();
+  const cancelReviewAnimation = (review) => {
+    if (!review.animation) return;
+    review.animation.onfinish = null;
+    review.animation.cancel();
+    review.animation = null;
+  };
 
-    reviewOpenButton.setAttribute("aria-expanded", String(expanded));
+  const setReviewExpanded = (review, expanded, { animate = true, moveFocus = true } = {}) => {
+    const { openButton, panel, closeButton } = review;
+    // Carry the visible panel's height into a switch so the shared area resizes smoothly.
+    const visiblePanel = expanded ? expandableReviews.find((item) => !item.panel.hidden)?.panel : panel;
+    const startHeight = visiblePanel && !visiblePanel.hidden ? visiblePanel.getBoundingClientRect().height : 0;
+    cancelReviewAnimation(review);
+
+    if (expanded) {
+      expandableReviews.forEach((other) => {
+        if (other !== review && !other.panel.hidden) {
+          setReviewExpanded(other, false, { animate: false, moveFocus: false });
+        }
+      });
+    }
+
+    openButton.setAttribute("aria-expanded", String(expanded));
     closeButton.setAttribute("aria-expanded", String(expanded));
-    reviewOpenButton.querySelector("span").textContent = expanded ? "Read less" : "Read more";
-    reviewOpenButton.querySelector("path").setAttribute("d", expanded ? "m3 7.5 3-3 3 3" : "m3 4.5 3 3 3-3");
-    reviewPanel.hidden = false;
-    reviewPanel.inert = !expanded;
-    if (expanded) reviewPanel.setAttribute("aria-hidden", "false");
+    openButton.querySelector("span").textContent = expanded ? "Read less" : "Read more";
+    openButton.querySelector("path").setAttribute("d", expanded ? "m3 7.5 3-3 3 3" : "m3 4.5 3 3 3-3");
+    panel.hidden = false;
+    if (expanded) {
+      panel.inert = false;
+      panel.setAttribute("aria-hidden", "false");
+    }
 
-    const focusTarget = expanded ? reviewPanel : reviewOpenButton;
-    focusTarget.focus({ preventScroll: true });
-    if (!expanded) reviewPanel.setAttribute("aria-hidden", "true");
+    const focusTarget = expanded ? panel : openButton;
+    if (moveFocus) focusTarget.focus({ preventScroll: true });
+    if (!expanded) {
+      panel.inert = true;
+      panel.setAttribute("aria-hidden", "true");
+    }
 
-    if (!reducedMotion.matches && typeof reviewPanel.animate === "function") {
-      animation = reviewPanel.animate(
+    if (animate && !reducedMotion.matches && typeof panel.animate === "function") {
+      review.animation = panel.animate(
         [
           { height: `${startHeight}px`, overflow: "hidden" },
-          { height: `${expanded ? reviewPanel.getBoundingClientRect().height : 0}px`, overflow: "hidden" },
+          { height: `${expanded ? panel.getBoundingClientRect().height : 0}px`, overflow: "hidden" },
         ],
         { duration: 240, easing: "ease-in-out" }
       );
-      animation.onfinish = () => { reviewPanel.hidden = !expanded; };
+      review.animation.onfinish = () => {
+        panel.hidden = !expanded;
+        review.animation = null;
+      };
     } else {
-      reviewPanel.hidden = !expanded;
+      panel.hidden = !expanded;
     }
 
     // Return to the trigger without an abrupt focus-induced scroll on collapse.
-    focusTarget.scrollIntoView({
-      behavior: reducedMotion.matches ? "instant" : "smooth",
-      block: "nearest",
-    });
+    if (moveFocus) {
+      focusTarget.scrollIntoView({
+        behavior: reducedMotion.matches ? "instant" : "smooth",
+        block: "nearest",
+      });
+    }
   };
 
-  reviewOpenButton.addEventListener("click", () => {
-    setReviewExpanded(reviewOpenButton.getAttribute("aria-expanded") !== "true");
+  expandableReviews.forEach((review) => {
+    review.openButton.addEventListener("click", () => {
+      setReviewExpanded(review, review.openButton.getAttribute("aria-expanded") !== "true");
+    });
+    review.closeButton.addEventListener("click", () => setReviewExpanded(review, false));
+    review.openButton.hidden = false;
   });
-  closeButton.addEventListener("click", () => setReviewExpanded(false));
-  reviewOpenButton.hidden = false;
 
   reducedMotion.addEventListener("change", () => {
-    if (reducedMotion.matches && animation) {
-      animation.cancel();
-      reviewPanel.hidden = reviewOpenButton.getAttribute("aria-expanded") !== "true";
-    }
+    if (!reducedMotion.matches) return;
+    expandableReviews.forEach((review) => {
+      cancelReviewAnimation(review);
+      review.panel.hidden = review.openButton.getAttribute("aria-expanded") !== "true";
+    });
   });
 }
 
