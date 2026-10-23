@@ -1,4 +1,5 @@
 @import url("./sticky-header.css");
+@import url("./photo-hover.css");
 
 /* About-page subset; shared and other page-specific bundles remain unchanged. */
 * {

@@ -1,4 +1,5 @@
 @import url("./sticky-header.css");
+@import url("./photo-hover.css");
 
 /* Shared subset for all five service pages; general page bundles remain unchanged. */
 * {margin: 0;
