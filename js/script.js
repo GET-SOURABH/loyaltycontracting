@@ -57,6 +57,74 @@ if (heroVideo) {
   }
 }
 
+// Enhance only the homepage hero statistics; HTML keeps the final accessible values.
+(function animateHomepageStatistics() {
+  const stats = document.querySelector("body.home-page .who-card .stats");
+  if (!stats || !("IntersectionObserver" in window) ||
+      typeof window.requestAnimationFrame !== "function" ||
+      typeof window.matchMedia !== "function") return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (reducedMotion.matches) return;
+
+  const numbers = Array.from(stats.querySelectorAll("h3[data-count-target]"), (element) => ({
+    element,
+    target: Number(element.dataset.countTarget),
+    decimals: Number(element.dataset.countDecimals || 0),
+    suffix: element.dataset.countSuffix || "",
+    finalText: element.textContent,
+  }));
+  if (!numbers.length) return;
+
+  const duration = 1500;
+  let frameId = 0;
+  let started = false;
+  let startTime;
+
+  const finish = () => {
+    started = true;
+    if (frameId) window.cancelAnimationFrame(frameId);
+    frameId = 0;
+    observer.disconnect();
+    numbers.forEach(({ element, finalText }) => {
+      if (element.textContent !== finalText) element.textContent = finalText;
+    });
+    reducedMotion.removeEventListener("change", handleMotionChange);
+    window.removeEventListener("pagehide", finish);
+  };
+
+  const handleMotionChange = () => {
+    if (reducedMotion.matches) finish();
+  };
+
+  const tick = (timestamp) => {
+    if (startTime === undefined) startTime = timestamp;
+    const progress = Math.min((timestamp - startTime) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3); // Cubic ease-out.
+
+    numbers.forEach(({ element, target, decimals, suffix }) => {
+      const value = target * eased;
+      const text = (decimals ? value.toFixed(decimals) : String(Math.floor(value))) + suffix;
+      // Each heading's aria-label stays at the final value; no live announcements.
+      if (element.textContent !== text) element.textContent = text;
+    });
+
+    if (progress < 1) frameId = window.requestAnimationFrame(tick);
+    else finish();
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    if (started || !entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.35)) return;
+    started = true;
+    observer.disconnect();
+    frameId = window.requestAnimationFrame(tick);
+  }, { threshold: 0.35 });
+
+  reducedMotion.addEventListener("change", handleMotionChange);
+  window.addEventListener("pagehide", finish);
+  observer.observe(stats);
+}());
+
 document.querySelectorAll(".before-after-card").forEach((card) => {
   const slider = card.querySelector(".ba-range");
   if (!slider) return;
